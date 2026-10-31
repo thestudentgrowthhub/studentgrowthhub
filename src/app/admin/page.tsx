@@ -2,16 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { OPPORTUNITIES, Opportunity } from "@/data/site-data";
 import {
   ShieldAlert,
   Plus,
-  Calendar,
   Users,
-  Mail,
   GraduationCap,
   CheckCircle2,
   Lock,
