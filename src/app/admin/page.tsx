@@ -6,23 +6,19 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { OPPORTUNITIES, Opportunity } from "@/data/site-data";
 import {
-  ShieldAlert,
   Plus,
-  Users,
   GraduationCap,
   CheckCircle2,
   Lock,
   ArrowRight,
-  TrendingUp,
 } from "lucide-react";
 
 export default function AdminPortalPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState("");
-  const [activeTab, setActiveTab] = useState<"opportunities" | "cohorts" | "volunteers">("opportunities");
+  const [activeTab, setActiveTab] = useState<"opportunities" | "programs">("opportunities");
   const [opportunitiesList, setOpportunitiesList] = useState<Opportunity[]>(OPPORTUNITIES);
   
-  // New Opportunity Form State
   const [newOpp, setNewOpp] = useState({
     title: "",
     organization: "",
@@ -39,7 +35,7 @@ export default function AdminPortalPage() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (passcode.trim().toLowerCase() === "tsgh2026" || passcode.trim().length > 0) {
+    if (passcode.trim().length > 0) {
       setIsAuthenticated(true);
     }
   };
@@ -50,8 +46,8 @@ export default function AdminPortalPage() {
       id: `opp-${Date.now()}`,
       slug: newOpp.title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       ...newOpp,
-      benefits: ["Full financial support", "Mentorship & networking access"],
-      eligibility: ["Current student or young graduate", "Passion for learning & leadership"],
+      benefits: ["Verified opportunity details"],
+      eligibility: ["See official portal for complete requirements"],
       featured: true,
     };
     setOpportunitiesList([created, ...opportunitiesList]);
@@ -77,28 +73,27 @@ export default function AdminPortalPage() {
 
       <main className="flex-1 py-12 lg:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {!isAuthenticated ? (
-          /* Authentication Screen */
           <div className="max-w-md mx-auto my-12 p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xl space-y-6 text-center">
             <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 mx-auto flex items-center justify-center">
               <Lock className="w-7 h-7" />
             </div>
 
             <div className="space-y-1">
-              <h2 className="text-2xl font-bold tracking-tight">Student Growth Hub Team Portal</h2>
+              <h2 className="text-2xl font-bold tracking-tight">Team Administration</h2>
               <p className="text-xs text-slate-500">
-                Authorized administration for coordinators to publish opportunities &amp; manage deadlines without code.
+                Designated team portal to publish opportunities, update deadlines, and manage programs without requiring a developer.
               </p>
             </div>
 
             <form onSubmit={handleLogin} className="space-y-4 text-left">
               <div>
                 <label className="block text-xs font-semibold mb-1 text-slate-700">
-                  Team Passcode (e.g. tsgh2026)
+                  Team Passcode
                 </label>
                 <input
                   type="password"
                   required
-                  placeholder="Enter passcode..."
+                  placeholder="Enter team passcode..."
                   value={passcode}
                   onChange={(e) => setPasscode(e.target.value)}
                   className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -109,25 +104,19 @@ export default function AdminPortalPage() {
                 type="submit"
                 className="w-full py-3 rounded-xl font-bold text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-md transition-all"
               >
-                Access Coordinator Dashboard
+                Sign In
               </button>
             </form>
-
-            <div className="text-[11px] text-slate-400 pt-2 border-t border-slate-100">
-              Role-Based Access Control (RBAC) ready for Supabase Auth.
-            </div>
           </div>
         ) : (
-          /* Main Admin Workspace */
           <div className="space-y-8 animate-fade-in">
-            {/* Top Bar */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/80">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
-                  Student Growth Hub Administration Console
+                  The Student Growth Hub Administration
                 </span>
                 <h1 className="text-3xl font-black text-slate-900 mt-1">
-                  Content Management &amp; Intakes
+                  Opportunities &amp; Programs Manager
                 </h1>
               </div>
 
@@ -136,7 +125,7 @@ export default function AdminPortalPage() {
                   href="/opportunities"
                   className="px-4 py-2 rounded-xl text-xs font-bold bg-white border border-slate-200 hover:bg-slate-50 transition-colors"
                 >
-                  View Live Hub
+                  View Opportunities Hub
                 </Link>
                 <button
                   onClick={() => setIsAuthenticated(false)}
@@ -147,46 +136,6 @@ export default function AdminPortalPage() {
               </div>
             </div>
 
-            {/* Quick Stats Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
-                <div className="flex items-center justify-between text-slate-400 mb-2">
-                  <span className="text-xs font-bold uppercase">Active Listings</span>
-                  <GraduationCap className="w-4 h-4 text-blue-600" />
-                </div>
-                <div className="text-2xl font-black">{opportunitiesList.length}</div>
-                <div className="text-[11px] text-emerald-600 font-medium mt-1">100% Verified</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
-                <div className="flex items-center justify-between text-slate-400 mb-2">
-                  <span className="text-xs font-bold uppercase">Pending Intakes</span>
-                  <Users className="w-4 h-4 text-emerald-600" />
-                </div>
-                <div className="text-2xl font-black">18</div>
-                <div className="text-[11px] text-blue-600 font-medium mt-1">Volunteer &amp; YAB</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
-                <div className="flex items-center justify-between text-slate-400 mb-2">
-                  <span className="text-xs font-bold uppercase">Community</span>
-                  <TrendingUp className="w-4 h-4 text-amber-600" />
-                </div>
-                <div className="text-2xl font-black">1,500+</div>
-                <div className="text-[11px] text-amber-600 font-medium mt-1">WhatsApp Members</div>
-              </div>
-
-              <div className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs">
-                <div className="flex items-center justify-between text-slate-400 mb-2">
-                  <span className="text-xs font-bold uppercase">Countries</span>
-                  <ShieldAlert className="w-4 h-4 text-purple-600" />
-                </div>
-                <div className="text-2xl font-black">37+</div>
-                <div className="text-[11px] text-purple-600 font-medium mt-1">Pan-African &amp; Global</div>
-              </div>
-            </div>
-
-            {/* Navigation Tabs */}
             <div className="flex items-center gap-2 border-b border-slate-200/80 pb-2 text-xs font-bold">
               <button
                 onClick={() => setActiveTab("opportunities")}
@@ -196,49 +145,34 @@ export default function AdminPortalPage() {
                     : "text-slate-600 hover:bg-slate-100"
                 }`}
               >
-                Opportunities Manager
+                Opportunities ({opportunitiesList.length})
               </button>
               <button
-                onClick={() => setActiveTab("cohorts")}
+                onClick={() => setActiveTab("programs")}
                 className={`px-4 py-2 rounded-xl transition-all ${
-                  activeTab === "cohorts"
+                  activeTab === "programs"
                     ? "bg-blue-600 text-white shadow-xs"
                     : "text-slate-600 hover:bg-slate-100"
                 }`}
               >
-                Cohort Status
-              </button>
-              <button
-                onClick={() => setActiveTab("volunteers")}
-                className={`px-4 py-2 rounded-xl transition-all ${
-                  activeTab === "volunteers"
-                    ? "bg-blue-600 text-white shadow-xs"
-                    : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                Volunteer Applications
+                Active Programs
               </button>
             </div>
 
-            {/* Tab 1: Opportunities Manager */}
             {activeTab === "opportunities" && (
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Form: Add Opportunity */}
                 <div className="lg:col-span-5 p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
                       <Plus className="w-4 h-4 text-blue-600" />
-                      <span>Publish Opportunity</span>
+                      <span>Publish New Opportunity</span>
                     </h3>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700">
-                      Zero Code
-                    </span>
                   </div>
 
                   {addedSuccess && (
                     <div className="p-3 bg-emerald-50 border border-emerald-300 rounded-xl text-emerald-700 text-xs font-semibold flex items-center gap-2">
                       <CheckCircle2 className="w-4 h-4" />
-                      <span>Opportunity added to database!</span>
+                      <span>Opportunity published!</span>
                     </div>
                   )}
 
@@ -261,7 +195,7 @@ export default function AdminPortalPage() {
                         <input
                           type="text"
                           required
-                          placeholder="e.g. Oxford University"
+                          placeholder="Host Organization"
                           value={newOpp.organization}
                           onChange={(e) => setNewOpp({ ...newOpp, organization: e.target.value })}
                           className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200"
@@ -310,7 +244,7 @@ export default function AdminPortalPage() {
                     </div>
 
                     <div>
-                      <label className="block font-semibold mb-1">Application URL *</label>
+                      <label className="block font-semibold mb-1">Official Application Link *</label>
                       <input
                         type="url"
                         required
@@ -322,11 +256,11 @@ export default function AdminPortalPage() {
                     </div>
 
                     <div>
-                      <label className="block font-semibold mb-1">Brief Description *</label>
+                      <label className="block font-semibold mb-1">Description *</label>
                       <textarea
                         rows={3}
                         required
-                        placeholder="Summary of benefits, perks, and scope..."
+                        placeholder="Summary of benefits and eligibility..."
                         value={newOpp.description}
                         onChange={(e) => setNewOpp({ ...newOpp, description: e.target.value })}
                         className="w-full px-3 py-2 rounded-xl bg-slate-50 border border-slate-200"
@@ -337,18 +271,17 @@ export default function AdminPortalPage() {
                       type="submit"
                       className="w-full py-2.5 rounded-xl font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-xs"
                     >
-                      Publish to Opportunities Hub
+                      Publish Opportunity
                     </button>
                   </form>
                 </div>
 
-                {/* Table: Existing Opportunities */}
                 <div className="lg:col-span-7 p-6 rounded-3xl bg-white border border-slate-200/80 shadow-sm space-y-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-base font-bold text-slate-900">
-                      Live Listings ({opportunitiesList.length})
+                    <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
+                      <GraduationCap className="w-4 h-4 text-blue-600" />
+                      <span>Published Opportunities ({opportunitiesList.length})</span>
                     </h3>
-                    <span className="text-xs text-slate-400">Click to preview</span>
                   </div>
 
                   <div className="space-y-3">
@@ -366,7 +299,7 @@ export default function AdminPortalPage() {
                             <span>•</span>
                             <span>{opp.organization}</span>
                             <span>•</span>
-                            <span className="text-rose-500 font-medium">Due: {opp.deadline}</span>
+                            <span className="text-rose-500 font-medium">Deadline: {opp.deadline}</span>
                           </div>
                         </div>
 
@@ -384,49 +317,25 @@ export default function AdminPortalPage() {
               </div>
             )}
 
-            {/* Tab 2: Cohorts */}
-            {activeTab === "cohorts" && (
+            {activeTab === "programs" && (
               <div className="p-6 rounded-3xl bg-white border border-slate-200/80 space-y-4">
-                <h3 className="text-base font-bold">Active Programs &amp; Cohort Tracking</h3>
+                <h3 className="text-base font-bold">Active Programs</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                   <div className="p-4 rounded-2xl border border-emerald-500/30 bg-emerald-50/30 space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-emerald-700 text-sm">Growth Beyond Grades</span>
-                      <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white font-bold text-[10px]">Cohort 2 Active</span>
+                      <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white font-bold text-[10px]">Cohort 2 Ongoing</span>
                     </div>
-                    <p className="text-slate-600">50 students undergoing 6 weeks of training across 12 countries in partnership with Reboot Foundation.</p>
+                    <p className="text-slate-600">Cohort 1 trained 30 students across 5 countries (Nigeria, Cameroon, Kenya, Zimbabwe, Bolivia). Cohort 2 of 50 students across 12 countries is currently ongoing in partnership with The Reboot Wellbeing and Empowerment Foundation.</p>
                   </div>
 
                   <div className="p-4 rounded-2xl border border-blue-500/30 bg-blue-50/30 space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="font-bold text-blue-700 text-sm">ELITE Campus × Kryptr</span>
-                      <span className="px-2 py-0.5 rounded-full bg-blue-600 text-white font-bold text-[10px]">Open Virtual Track</span>
+                      <span className="px-2 py-0.5 rounded-full bg-blue-600 text-white font-bold text-[10px]">Open Registration</span>
                     </div>
-                    <p className="text-slate-600">3-week virtual work experience pipeline. Students completing briefs for portfolio and paid internships.</p>
+                    <p className="text-slate-600">3-week virtual work experience program (3 hours/week). Free for the first month via app.kryptr.co.</p>
                   </div>
-                </div>
-              </div>
-            )}
-
-            {/* Tab 3: Volunteers */}
-            {activeTab === "volunteers" && (
-              <div className="p-6 rounded-3xl bg-white border border-slate-200/80 space-y-4 text-xs">
-                <h3 className="text-base font-bold">Recent Intake Submissions (18)</h3>
-                <p className="text-slate-500">Applications submitted from the `/get-involved` portal across 37+ countries.</p>
-                <div className="space-y-2">
-                  {[
-                    { name: "Fatima Al-Hassan", country: "Nigeria", role: "Opportunity Curator", date: "Today" },
-                    { name: "Kofi Mensah", country: "Ghana", role: "Youth Advisory Board", date: "Yesterday" },
-                    { name: "Brian Kiprop", country: "Kenya", role: "Community Moderator", date: "2 days ago" },
-                  ].map((sub, i) => (
-                    <div key={i} className="p-3 rounded-xl bg-slate-50 border border-slate-200/60 flex items-center justify-between">
-                      <div>
-                        <span className="font-bold text-slate-900">{sub.name}</span>
-                        <span className="text-slate-500 ml-2">({sub.country}) — {sub.role}</span>
-                      </div>
-                      <span className="text-[11px] text-slate-400">{sub.date}</span>
-                    </div>
-                  ))}
                 </div>
               </div>
             )}

@@ -3,343 +3,408 @@ export interface Opportunity {
   slug: string;
   title: string;
   organization: string;
-  category: "Scholarship" | "Internship" | "Fellowship" | "Leadership" | "Conference" | "Competition" | "Mentorship";
-  fundingType: "Fully Funded" | "Partially Funded" | "Free / Stipend" | "Unfunded";
+  category:
+    | "Scholarship"
+    | "Internship"
+    | "Fellowship"
+    | "Leadership"
+    | "Conference"
+    | "Competition";
+  fundingType: "Fully Funded" | "Partially Funded" | "Free / Stipend";
   eligibleRegion: string;
-  educationLevel: "Undergraduate" | "Postgraduate" | "High School" | "Open to All";
+  educationLevel: "Undergraduate" | "Postgraduate" | "All Levels" | "High School & Undergrad";
   deadline: string;
   location: string;
   description: string;
   benefits: string[];
   eligibility: string[];
   officialLink: string;
-  featured?: boolean;
+  featured: boolean;
 }
 
 export interface Program {
   id: string;
-  slug: string;
   title: string;
-  subtitle: string;
   badge: string;
-  partner?: string;
+  partner: string;
+  tagline: string;
   description: string;
-  impactMetrics: { label: string; value: string }[];
+  metrics: { label: string; value: string }[];
   highlights: string[];
-  duration: string;
-  status: "Active / Cohort 2" | "Open for Applications" | "Monthly Recurring";
-  actionText: string;
-  actionUrl: string;
+  ctaText: string;
+  ctaLink: string;
   image: string;
-  secondaryImage?: string;
+  status: string;
 }
 
-export interface StrategicPillar {
-  id: number;
+export interface Pillar {
+  number: string;
   title: string;
   description: string;
   iconName: string;
-  accentColor: string;
+  highlight: string;
   image: string;
-  highlightStat: string;
 }
 
-export const SITE_METRICS = [
-  { label: "LinkedIn Community", value: "19,000+", detail: "Engaged aspiring students & young professionals" },
-  { label: "Countries Reached", value: "37+", detail: "Pan-African & global student network" },
-  { label: "WhatsApp Hub Members", value: "1,500+", detail: "Active peer learning & opportunity sharing" },
-  { label: "Opportunity Outcomes", value: "250+", detail: "Secured scholarships, jobs & fellowships" },
+export const IMPACT_METRICS = [
+  {
+    value: "19K+",
+    numericValue: 19000,
+    suffix: "+",
+    label: "LinkedIn Followers",
+  },
+  {
+    value: "37",
+    numericValue: 37,
+    suffix: "",
+    label: "Countries Reached",
+  },
+  {
+    value: "1,500+",
+    numericValue: 1500,
+    suffix: "+",
+    label: "WhatsApp Community Members",
+  },
+  {
+    value: "250+",
+    numericValue: 250,
+    suffix: "+",
+    label: "Opportunity Outcomes",
+  },
 ];
 
-export const STRATEGIC_PILLARS: StrategicPillar[] = [
+export const STRATEGIC_PILLARS: Pillar[] = [
   {
-    id: 1,
+    number: "01",
     title: "Academic Excellence",
-    description: "Developing effective study habits, learning strategies, academic confidence, and the growth mindset to excel in higher education.",
+    description:
+      "Helping students develop effective study habits, learning strategies, academic confidence, and the mindset to excel.",
     iconName: "GraduationCap",
-    accentColor: "from-blue-600 to-indigo-600",
-    image: "/images/campus-student-ambassadors-duo.jpg",
-    highlightStat: "Peer study circles & academic mentorship across 37+ countries",
+    highlight: "Study Habits & Academic Confidence",
+    image: "/images/summit-award-certificate-winners.jpg",
   },
   {
-    id: 2,
-    title: "Career & Employability",
-    description: "Equipping students with practical workplace readiness, CV development, personal branding, and real work experience through Growth Beyond Grades.",
+    number: "02",
+    title: "Career & Employability Development",
+    description:
+      "Equipping students with practical skills, CV development, personal branding, and workplace readiness through The Growth Beyond Grades initiative in partnership with the Reboot Wellbeing and Empowerment Foundation.",
     iconName: "Briefcase",
-    accentColor: "from-orange-500 to-amber-500",
+    highlight: "Growth Beyond Grades × Reboot Foundation",
     image: "/images/employability-training-logbook-session.jpg",
-    highlightStat: "80+ fellows trained across Cohort 1 & Cohort 2",
   },
   {
-    id: 3,
-    title: "Leadership & Personal Growth",
-    description: "Fostering leadership capacity, emotional resilience, diplomatic speaking, and proactive problem-solving abilities.",
-    iconName: "Compass",
-    accentColor: "from-emerald-600 to-teal-600",
-    image: "/images/student-leaders-stage-speaking.jpg",
-    highlightStat: "Youth delegates represented at UN, UNESCO & national forums",
+    number: "03",
+    title: "Leadership & Personal Development",
+    description:
+      "Developing leadership capacity, confidence, communication, and problem-solving abilities.",
+    iconName: "Award",
+    highlight: "Confidence, Communication & Problem-Solving",
+    image: "/images/model-un-summit-boardroom.jpg",
   },
   {
-    id: 4,
+    number: "04",
     title: "Digital Skills & Innovation",
-    description: "Promoting digital literacy, AI readiness, emerging technology tools, and virtual work simulations for the future of work.",
+    description:
+      "Promoting digital literacy, AI literacy, innovation, and responsible technology use.",
     iconName: "Cpu",
-    accentColor: "from-sky-500 to-blue-600",
-    image: "/images/diplomatic-chamber-delegates.jpg",
-    highlightStat: "3-week virtual work experience powered by ELITE Campus × Kryptr",
+    highlight: "Digital Literacy, AI & Innovation",
+    image: "/images/african-innovation-hub-delegates.jpg",
   },
   {
-    id: 5,
+    number: "05",
     title: "Mentorship & Networking",
-    description: "Connecting students directly with seasoned industry mentors, international fellowship alumni, and collaborative peer circles.",
+    description:
+      "Connecting students with mentors, professionals, peers, and supportive communities.",
     iconName: "Users",
-    accentColor: "from-indigo-600 to-blue-500",
+    highlight: "Mentors, Professionals & Peer Networks",
     image: "/images/female-leaders-mentorship-meetup.jpg",
-    highlightStat: "1,500+ active members in our mentored WhatsApp hub",
   },
   {
-    id: 6,
-    title: "Social Impact & SDG Action",
-    description: "Inspiring youth to lead grassroots school drives, champion the UN Sustainable Development Goals (SDGs), and become active changemakers.",
+    number: "06",
+    title: "Social Impact & Community Engagement",
+    description:
+      "Encouraging students to develop initiatives, contribute to their communities, and become changemakers.",
     iconName: "Globe",
-    accentColor: "from-emerald-500 to-green-600",
+    highlight: "Community Initiatives & Changemaking",
     image: "/images/grassroots-climate-sdg-school-drive.jpg",
-    highlightStat: "Grassroots SDG 4 Quality Education & SDG 13 Climate outreach",
   },
 ];
 
 export const FLAGSHIP_PROGRAMS: Program[] = [
   {
     id: "growth-beyond-grades",
-    slug: "growth-beyond-grades",
     title: "Growth Beyond Grades",
-    subtitle: "Empowerment, Mental Resilience & Career Readiness",
-    badge: "Flagship Initiative",
-    partner: "In partnership with The Reboot Wellbeing & Empowerment Foundation",
+    badge: "Flagship Cohort Program",
+    partner: "In Partnership with The Reboot Wellbeing and Empowerment Foundation",
+    tagline:
+      "A student development program focused on employability, leadership, career clarity, and personal development.",
     description:
-      "A transformative 6-week development experience designed to bridge the gap between academic theory and real-world career readiness. Students undergo reflective growth sessions, career clarity coaching, employability masterclasses, and cross-border peer collaboration.",
-    impactMetrics: [
-      { label: "Cohort 1 Reach", value: "30 students • 5 countries" },
-      { label: "Cohort 2 Reach", value: "50 students • 12 countries" },
-      { label: "Global Footprint", value: "Nigeria, Kenya, Bolivia & more" },
-      { label: "Duration", value: "6 intensive weeks" },
+      "Cohort 1 brought together 30 students across 5 countries including Nigeria, Cameroon, Kenya, Zimbabwe, and Bolivia. They were trained for 6 weeks on mental resilience and wellbeing, leadership and communication skills, career readiness and employability, and personal growth awareness. Cohort 2 of 50 students across 12 countries is currently ongoing.",
+    metrics: [
+      { label: "Cohort 1", value: "30 Students (5 Countries)" },
+      { label: "Cohort 2", value: "50 Students (12 Countries)" },
+      { label: "Duration", value: "6-Week Training" },
     ],
     highlights: [
-      "Mental resilience and wellbeing workshops",
-      "Employability skills and professional CV formatting",
-      "Career clarity and industry alignment sessions",
-      "Cross-border peer learning and lifelong network",
+      "Reflection and Growth sessions",
+      "Employability skills training",
+      "Career clarity workshops",
+      "Supportive peer learning environment",
     ],
-    duration: "6 Weeks (Virtual)",
-    status: "Active / Cohort 2",
-    actionText: "Learn More & Join Waitlist",
-    actionUrl: "/get-involved?tab=volunteer",
-    image: "/images/employability-training-logbook-session.jpg",
-    secondaryImage: "/images/un-women-nile-university-forum.jpg",
+    ctaText: "Join Our Community for Updates",
+    ctaLink: "https://chat.whatsapp.com/K9svkTf3bNM2HlwknLpIOH?s=cl&p=a&iam=2",
+    image: "/images/un-women-nile-university-forum.jpg",
+    status: "Cohort 2 Ongoing",
   },
   {
-    id: "elite-campus-kryptr",
-    slug: "elite-campus-kryptr",
-    title: "ELITE Campus × Kryptr",
-    subtitle: "Virtual Work Experience & Direct Internship Pipeline",
-    badge: "Industry Collaboration",
-    partner: "Powered by Kryptr",
+    id: "elite-campus",
+    title: "ELITE Campus — The Student Growth Hub × Kryptr",
+    badge: "Virtual Work Experience",
+    partner: "The Student Growth Hub × Kryptr",
+    tagline:
+      "Every job is asking for experience. Nobody is willing to give you experience. This is what we've all been missing — real work experience.",
     description:
-      "Every job asks for experience, yet nobody offers initial experience. ELITE Campus solves this catch-22 with a structured 3-week virtual work experience program allowing students to work on real company briefs, build proof-of-work, and unlock paid internships.",
-    impactMetrics: [
-      { label: "Weekly Commitment", value: "Just 3 hours / week" },
-      { label: "First Month", value: "100% Free Access" },
-      { label: "Key Outcome", value: "Portfolio & Paid Internships" },
-      { label: "Delivery Format", value: "100% Remote / Virtual" },
+      "ELITE Campus by The Student Growth Hub & Kryptr is a 3-week virtual work experience program designed to help students build their portfolio and CV, gain practical workplace experience, and access paid internship opportunities.",
+    metrics: [
+      { label: "Program Length", value: "3 Weeks Virtual" },
+      { label: "Weekly Commitment", value: "Just 3 Hours / Week" },
+      { label: "First Month", value: "FREE (Future Cohorts Paid)" },
     ],
     highlights: [
-      "Work on simulated live briefs from global companies",
-      "Build a verifiable portfolio that proves competence",
-      "Fast-track recommendations to hiring startup partners",
-      "Flexible schedule tailored for busy university timetables",
+      "Just 3 hours a week commitment",
+      "Build your portfolio and CV with real work experience",
+      "Get access to paid internship opportunities",
+      "FREE for the 1st month (Sign up at app.kryptr.co)",
     ],
-    duration: "3 Weeks",
-    status: "Open for Applications",
-    actionText: "Register on Kryptr (app.kryptr.co)",
-    actionUrl: "https://app.kryptr.co",
-    image: "/images/diplomatic-chamber-delegates.jpg",
-    secondaryImage: "/images/creative-leadership-student-cohort.jpg",
+    ctaText: "Sign Up on Kryptr (app.kryptr.co)",
+    ctaLink: "https://app.kryptr.co",
+    image: "/images/african-innovation-hub-delegates.jpg",
+    status: "Open for Registration",
   },
   {
     id: "webinars",
-    slug: "student-development-webinars",
-    title: "Global Summits & Development Webinars",
-    subtitle: "Monthly Masterclasses & Diplomatic Forums with Global Leaders",
-    badge: "Monthly Series",
+    title: "Student Development Webinars",
+    badge: "Monthly Learning Series",
+    partner: "Global Speakers, Educators & Changemakers",
+    tagline:
+      "A monthly learning series featuring professionals, educators, entrepreneurs, and young changemakers.",
     description:
-      "A recurring learning series and diplomatic delegation platform featuring scholarship recipients, UN youth delegates, educators, and changemakers who share actionable strategies on study abroad, fellowship applications, and global leadership.",
-    impactMetrics: [
-      { label: "Cadence", value: "Monthly Sessions" },
-      { label: "Avg. Attendance", value: "200+ Students" },
-      { label: "Delegations", value: "UN, UNESCO & World Bank Forums" },
-      { label: "Community Access", value: "100% Free" },
+      "Our interactive webinars, workshops, and conferences connect students directly with experienced professionals, educators, and fellow youth leaders to learn practical academic, career, and leadership strategies.",
+    metrics: [
+      { label: "Frequency", value: "Monthly Series" },
+      { label: "Format", value: "Live Workshops & Q&A" },
+      { label: "Access", value: "Free for Students" },
     ],
     highlights: [
-      "Live Q&A with scholarship evaluators and fellowship alumni",
-      "Youth representation at UN, UNESCO, and diplomatic summits",
-      "Practical workshops on CV, LinkedIn, and personal branding",
-      "Direct breakout rooms for international peer networking",
+      "Live sessions with professionals, educators, and entrepreneurs",
+      "Scholarship and fellowship application guidance",
+      "Career development and leadership workshops",
+      "Direct Q&A and networking with young changemakers",
     ],
-    duration: "Monthly Masterclasses",
-    status: "Monthly Recurring",
-    actionText: "Join Next Session on WhatsApp",
-    actionUrl: "https://chat.whatsapp.com/K9svkTf3bNM2HlwknLpIOH?s=cl&p=a&iam=2",
+    ctaText: "Join WhatsApp for Webinar Links",
+    ctaLink: "https://chat.whatsapp.com/K9svkTf3bNM2HlwknLpIOH?s=cl&p=a&iam=2",
     image: "/images/unesco-auditorium-plenary-session.jpg",
-    secondaryImage: "/images/model-un-summit-boardroom.jpg",
+    status: "Monthly Live Series",
   },
 ];
 
 export const OPPORTUNITIES: Opportunity[] = [
   {
     id: "opp-1",
-    slug: "chevening-scholarship-uk",
-    title: "Chevening UK Government Master's Scholarship",
+    slug: "chevening-uk-government-scholarship",
+    title: "Chevening UK Government Global Scholarships",
     organization: "UK Foreign, Commonwealth & Development Office",
     category: "Scholarship",
     fundingType: "Fully Funded",
-    eligibleRegion: "Global / 160+ Countries",
+    eligibleRegion: "Global (160+ Countries)",
     educationLevel: "Postgraduate",
     deadline: "2026-11-05",
     location: "United Kingdom",
     description:
-      "Chevening Scholarships are the UK government’s global scholarship programme, funded by the FCDO and partner organisations. It covers full tuition fees, monthly living allowance, economy travel, and exclusive networking events across the UK.",
+      "Chevening Scholarships enable outstanding emerging leaders from all over the world to pursue one-year master’s degrees in the UK. Fully funded including flights, accommodation, and course fees.",
     benefits: [
-      "Full university tuition fees covered",
-      "Monthly living stipend allowance",
-      "Return economy flight to the UK",
-      "Access to exclusive Chevening networking summits",
+      "100% University tuition fees covered",
+      "Monthly living stipend for accommodation and expenses",
+      "Economy class return airfare to the UK",
+      "Access to exclusive Chevening global networking events",
     ],
     eligibility: [
-      "Citizen of a Chevening-eligible country or territory",
-      "Hold an undergraduate degree equivalent to UK 2:1 honours",
-      "Minimum of 2 years (2,800 hours) of work experience",
-      "Commitment to return to home country for minimum of 2 years post-degree",
+      "Be a citizen of a Chevening-eligible country or territory",
+      "Hold an undergraduate degree equivalent to an upper second-class 2:1 honours",
+      "Have at least 2 years (2,800 hours) of work, internship, or volunteering experience",
     ],
     officialLink: "https://www.chevening.org/scholarships/",
     featured: true,
   },
   {
     id: "opp-2",
-    slug: "mandela-washington-fellowship",
-    title: "Mandela Washington Fellowship for Young African Leaders (YALI)",
-    organization: "U.S. Department of State",
-    category: "Fellowship",
-    fundingType: "Fully Funded",
-    eligibleRegion: "Sub-Saharan Africa",
-    educationLevel: "Open to All",
-    deadline: "2026-11-20",
-    location: "United States (Universities across USA)",
-    description:
-      "The flagship program of the Young African Leaders Initiative (YALI), empowering young leaders through 6 weeks of academic coursework, leadership training, and networking at prestigious U.S. colleges and universities.",
-    benefits: [
-      "J-1 visa support and roundtrip air travel to USA",
-      "6-week Leadership Institute in Business, Civic Engagement, or Public Management",
-      "Housing, meals, and living stipend included",
-      "Summit in Washington, D.C. with U.S. government and private sector leaders",
-    ],
-    eligibility: [
-      "Citizens and residents of sub-Saharan African countries",
-      "Aged 25 to 35 at the time of application",
-      "Demonstrated track record of leadership in business, civic life, or public service",
-      "Proficient in spoken and written English",
-    ],
-    officialLink: "https://www.mandelawashingtonfellowship.org/",
-    featured: true,
-  },
-  {
-    id: "opp-3",
-    slug: "google-generation-scholarship",
-    title: "Generation Google Scholarship (EMEA & North America)",
-    organization: "Google",
-    category: "Scholarship",
-    fundingType: "Partially Funded",
-    eligibleRegion: "Europe, Middle East, Africa",
-    educationLevel: "Undergraduate",
-    deadline: "2026-12-15",
-    location: "Worldwide / Study in Home Institution",
-    description:
-      "The Generation Google Scholarship was established to help aspiring computer scientists excel in technology and become leaders in the field. Selected recipients receive €7,000 (or local equivalent) toward tuition and learning expenses.",
-    benefits: [
-      "€7,000 award towards academic fees and study resources",
-      "Invitation to Google Student Retreat and mentoring circles",
-      "Direct connection with Google software engineers",
-    ],
-    eligibility: [
-      "Currently enrolled as a full-time student in a Computer Science or related degree",
-      "Demonstrate a strong academic record and passion for technology",
-      "Exemplify leadership and commitment to diversity in STEM",
-    ],
-    officialLink: "https://buildyourfuture.withgoogle.com/scholarships",
-    featured: true,
-  },
-  {
-    id: "opp-4",
-    slug: "elite-campus-virtual-internship",
-    title: "ELITE Campus Virtual Work Experience & Paid Internship Track",
+    slug: "elite-campus-kryptr-virtual-work-experience",
+    title: "ELITE Campus × Kryptr Virtual Work Experience",
     organization: "The Student Growth Hub × Kryptr",
     category: "Internship",
     fundingType: "Free / Stipend",
-    eligibleRegion: "Global",
-    educationLevel: "Open to All",
-    deadline: "2026-11-30",
-    location: "Virtual / Remote",
+    eligibleRegion: "Global (All Countries)",
+    educationLevel: "All Levels",
+    deadline: "2026-12-15",
+    location: "Remote / Online",
     description:
-      "A 3-week virtual work experience program tailored for students needing verifiable proof-of-work. Top performers gain access to paid internships with vetted partner startups and agencies.",
+      "A 3-week virtual work experience program requiring just 3 hours a week. Build your portfolio and CV with real-world experience and get direct access to paid internship opportunities. Free for the first month.",
     benefits: [
-      "Verifiable work experience certificate & CV reference",
-      "Real-world brief portfolio items",
-      "Access to paid internship opportunities",
-      "100% Free for the initial month",
+      "FREE for the 1st month of enrollment",
+      "Build verifiable portfolio projects and upgrade your CV",
+      "Direct pipeline to paid internship opportunities",
+      "Flexible 3 hours per week schedule",
     ],
     eligibility: [
-      "Students or recent graduates eager to break into tech, marketing, or business",
-      "Ability to dedicate 3 hours per week",
-      "Access to internet connection and computer or smartphone",
+      "Open to undergraduate, postgraduate, and recent graduates",
+      "Commitment to 3 hours per week for 3 weeks",
+      "Access to a smartphone or laptop with internet connection",
     ],
     officialLink: "https://app.kryptr.co",
     featured: true,
   },
   {
-    id: "opp-5",
-    slug: "world-youth-forum-fellowship",
-    title: "World Youth Peace & Innovation Summit Fellowship",
-    organization: "UN Youth Assembly Partners",
-    category: "Conference",
+    id: "opp-3",
+    slug: "mastercard-foundation-scholars-program",
+    title: "Mastercard Foundation Scholars Program",
+    organization: "Mastercard Foundation",
+    category: "Scholarship",
     fundingType: "Fully Funded",
-    eligibleRegion: "Global",
-    educationLevel: "Open to All",
+    eligibleRegion: "Africa & Developing Nations",
+    educationLevel: "Undergraduate",
     deadline: "2026-12-01",
-    location: "Geneva, Switzerland",
+    location: "Partner Universities Worldwide",
     description:
-      "Brings together 500 young changemakers from around the world to collaborate on youth-led solutions to the UN Sustainable Development Goals.",
+      "The Mastercard Foundation Scholars Program provides academically talented yet economically marginalized young people in Africa with access to quality university education and leadership training.",
     benefits: [
-      "Roundtrip international airfare",
-      "Full accommodation and meal coverage",
-      "Access to all plenaries, workshops, and diplomatic briefings",
+      "Full tuition, textbooks, and study materials",
+      "On-campus housing and nutritious meals",
+      "Return airfare, visa support, and monthly stipend",
+      "Mentorship, career counseling, and entrepreneurship seed support",
     ],
     eligibility: [
-      "Aged 18–30 at the time of conference",
-      "Active participant in community impact or youth advocacy",
+      "Demonstrated academic talent and commitment to giving back to your community",
+      "Citizen of an eligible African or developing country",
+      "Meet admission criteria at a Mastercard Foundation partner university",
     ],
-    officialLink: "https://www.un.org/youthenvoy/",
+    officialLink: "https://mastercardfdn.org/all/scholars/",
+    featured: true,
+  },
+  {
+    id: "opp-4",
+    slug: "un-youth-leadership-fellowship",
+    title: "United Nations Millennium Fellowship",
+    organization: "United Nations Academic Impact & MCN",
+    category: "Fellowship",
+    fundingType: "Free / Stipend",
+    eligibleRegion: "Global",
+    educationLevel: "Undergraduate",
+    deadline: "2026-11-30",
+    location: "Hybrid / Campus-Based",
+    description:
+      "The Millennium Fellowship is a semester-long leadership development program on university campuses worldwide to advance the UN Sustainable Development Goals (SDGs).",
+    benefits: [
+      "Official Certificate of Recognition from UNAI and MCN",
+      "Global peer networking across 150+ university campuses",
+      "World-class leadership curriculum and SDG project coaching",
+    ],
+    eligibility: [
+      "At least 18 years old and currently enrolled as an undergraduate student",
+      "In good academic standing at an accredited university",
+      "Passionate about community impact and the Sustainable Development Goals",
+    ],
+    officialLink: "https://www.millenniumfellows.org/",
+    featured: true,
+  },
+  {
+    id: "opp-5",
+    slug: "google-generation-scholarship-emea",
+    title: "Generation Google Scholarship (EMEA & Africa)",
+    organization: "Google",
+    category: "Scholarship",
+    fundingType: "Fully Funded",
+    eligibleRegion: "Africa, Europe & Middle East",
+    educationLevel: "Undergraduate",
+    deadline: "2026-12-10",
+    location: "Europe, Middle East & Africa",
+    description:
+      "Designed to help aspiring students pursuing computer science and technology degrees excel in tech and become leaders in the field. Selected students receive €7,000 (or local equivalent).",
+    benefits: [
+      "€7,000 (or local currency equivalent) academic grant",
+      "Invitation to Google Scholars mentorship and networking retreats",
+      "Direct exposure to Google engineering recruitment pipelines",
+    ],
+    eligibility: [
+      "Currently enrolled full-time in a Bachelor's program",
+      "Studying Computer Science, Computer Engineering, or a closely related technical field",
+      "Demonstrate a strong academic record and leadership in diversity & inclusion",
+    ],
+    officialLink: "https://buildyourfuture.withgoogle.com/scholarships",
     featured: false,
   },
   {
     id: "opp-6",
-    slug: "hult-prize-student-competition",
-    title: "Hult Prize $1M Social Entrepreneurship Challenge",
+    slug: "one-young-world-summit-delegate-scholarship",
+    title: "One Young World Global Summit Delegate Scholarship",
+    organization: "One Young World",
+    category: "Conference",
+    fundingType: "Fully Funded",
+    eligibleRegion: "Global",
+    educationLevel: "All Levels",
+    deadline: "2026-11-20",
+    location: "International Host City",
+    description:
+      "The global forum for young leaders, bringing together 2,000+ of the brightest young changemakers from 190+ countries to accelerate social impact.",
+    benefits: [
+      "Full delegate access to the One Young World Summit",
+      "Hotel accommodation, catering, and international return flights",
+      "Lifetime membership in the One Young World Ambassador Community",
+    ],
+    eligibility: [
+      "Aged 18 to 30 at the time of the summit",
+      "Demonstrated capacity for leadership and measurable impact in your community",
+      "Commitment to addressing local or global issues",
+    ],
+    officialLink: "https://www.oneyoungworld.com/scholarships",
+    featured: false,
+  },
+  {
+    id: "opp-7",
+    slug: "afdb-young-professionals-internship",
+    title: "African Development Bank (AfDB) Internship Program",
+    organization: "African Development Bank Group",
+    category: "Internship",
+    fundingType: "Free / Stipend",
+    eligibleRegion: "Africa & AfDB Member Countries",
+    educationLevel: "Postgraduate",
+    deadline: "2026-12-20",
+    location: "Abidjan / Hybrid Across Africa",
+    description:
+      "Provides university students with practical exposure to development banking, economic policy, agriculture, climate finance, and digital infrastructure across the African continent.",
+    benefits: [
+      "Monthly stipend provided to eligible interns",
+      "Hands-on project experience with international development economists",
+      "Mentorship and career progression insights within multilateral institutions",
+    ],
+    eligibility: [
+      "Aged 18 to 30 years old",
+      "Currently enrolled in a Master's level degree program or recently graduated",
+      "Fluent in English or French",
+    ],
+    officialLink: "https://www.afdb.org/en/about-us/careers/internship-programme",
+    featured: false,
+  },
+  {
+    id: "opp-8",
+    slug: "hult-prize-global-student-competition",
+    title: "Hult Prize $1M Global Student Entrepreneurship Challenge",
     organization: "Hult Prize Foundation",
     category: "Competition",
     fundingType: "Fully Funded",
-    eligibleRegion: "Global Universities",
+    eligibleRegion: "Global",
     educationLevel: "Undergraduate",
     deadline: "2026-12-30",
-    location: "Regional Finals across London, Dubai, Nairobi, Boston",
+    location: "Regional Finals Worldwide",
     description:
       "The world’s largest student social entrepreneurship competition. Student teams build scalable social enterprises that address pressing global challenges, competing for a $1,000,000 equity-free grand prize.",
     benefits: [
@@ -353,36 +418,6 @@ export const OPPORTUNITIES: Opportunity[] = [
     ],
     officialLink: "https://www.hultprize.org/",
     featured: false,
-  },
-];
-
-export const STUDENT_STORIES = [
-  {
-    name: "Chiamaka N. & Adaeze O.",
-    role: "Growth Beyond Grades Fellows & Campus Ambassadors",
-    country: "Nigeria",
-    quote:
-      "The Student Growth Hub completely shifted our perspective on preparing for life after university. Through the Growth Beyond Grades cohort, we refined our CVs, gained leadership clarity, and secured remote internship placements!",
-    image: "/images/campus-student-ambassadors-duo.jpg",
-    badge: "Cohort 1 Alumni",
-  },
-  {
-    name: "Emmanuel K. & Delegation",
-    role: "Youth Diplomats & Summit Delegates",
-    country: "Kenya & Nigeria",
-    quote:
-      "Being part of the Student Growth Hub community opened doors we never thought possible as undergraduates. The mentorship and weekly opportunities gave us the confidence to represent youth voices at international summits.",
-    image: "/images/amnesty-international-youth-delegates.jpg",
-    badge: "Global Summit Delegates",
-  },
-  {
-    name: "David O. & Samuel A.",
-    role: "SDG 4 & Climate Action Advocates",
-    country: "Cameroon & Nigeria",
-    quote:
-      "We learned how to turn student passion into measurable community action. The Student Growth Hub connects you with changemakers across 37+ countries who are actively taking SDG education into local schools.",
-    image: "/images/tsgh-founders-sdg-champions.jpg",
-    badge: "SDG Changemakers",
   },
 ];
 
