@@ -14,7 +14,7 @@ export default function TermsPage() {
         <h1 className="text-3xl font-black text-slate-900 dark:text-white">Terms and Conditions</h1>
         <div className="prose dark:prose-invert text-sm text-slate-600 dark:text-slate-300 space-y-4 leading-relaxed">
           <p>
-            Welcome to The Student Growth Hub (TSGH). By accessing our website, community groups, or programs, you agree to comply with and be bound by the following terms and conditions.
+            Welcome to The Student Growth Hub. By accessing our website, community groups, or programs, you agree to comply with and be bound by the following terms and conditions.
           </p>
           <h3 className="text-base font-bold text-slate-900 dark:text-white">Opportunity Listings &amp; Third-Party Links</h3>
           <p>

@@ -10,14 +10,14 @@ interface FaqItem {
 
 const FAQS: FaqItem[] = [
   {
-    question: "What is The Student Growth Hub (TSGH) and who can join?",
+    question: "What is The Student Growth Hub and who can join?",
     answer:
       "The Student Growth Hub is a global, youth-led student development platform established to help young people grow beyond the classroom. Any undergraduate, postgraduate, or aspiring high school student from any country can join our free community across WhatsApp and LinkedIn to access scholarships, practical skill-building, and peer mentorship.",
   },
   {
     question: "Are the scholarships and opportunities on the hub free to apply for?",
     answer:
-      "Yes, 100%. We only curate and publish verified, legitimate opportunities (scholarships, fellowships, grants, internships) from recognized international organizations, universities, and governments. TSGH will never charge students an application fee to discover or access opportunities.",
+      "Yes, 100%. We only curate and publish verified, legitimate opportunities (scholarships, fellowships, grants, internships) from recognized international organizations, universities, and governments. The Student Growth Hub will never charge students an application fee to discover or access opportunities.",
   },
   {
     question: "What is the Growth Beyond Grades initiative?",
@@ -35,7 +35,7 @@ const FAQS: FaqItem[] = [
       "We regularly onboard passionate student leaders, content creators, event hosts, and moderators. Head to our 'Get Involved' page and choose either the 'Volunteer' or 'Youth Advisory Board' tab to submit your application.",
   },
   {
-    question: "How can institutions and schools partner with TSGH?",
+    question: "How can institutions and schools partner with The Student Growth Hub?",
     answer:
       "We partner with secondary schools, tertiary universities, NGOs, and corporations to organize student masterclasses, hackathons, and scholarship distribution. Reach out through our Institutional Partnerships form on the Get Involved page or email us directly at thestudentgrowthhub@gmail.com.",
   },
@@ -62,7 +62,7 @@ export function FaqSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
-            Everything you need to know about joining TSGH, our cohort initiatives, and our verified opportunities.
+            Everything you need to know about joining The Student Growth Hub, our cohort initiatives, and our verified opportunities.
           </p>
         </div>
 

@@ -196,7 +196,7 @@ export function Footer() {
         {/* Bottom Bar: Copyright & Legal */}
         <div className="pt-10 mt-12 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-5 text-sm text-slate-500">
           <p className="flex items-center gap-1 font-normal">
-            © {new Date().getFullYear()} The Student Growth Hub (TSGH). Built for youth changemakers worldwide.
+            © {new Date().getFullYear()} The Student Growth Hub. Built for youth changemakers worldwide.
           </p>
           <div className="flex items-center space-x-6 font-semibold">
             <Link href="/legal/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>

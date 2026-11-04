@@ -5,12 +5,11 @@ import { Chatbot } from "@/components/Chatbot";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studentgrowthhub.org"),
-  title: "The Student Growth Hub (TSGH) | Beyond Grades. Beyond Limitations.",
+  title: "The Student Growth Hub | Beyond Grades. Beyond Limitations.",
   description:
     "A global youth-led student development platform empowering students across 37+ countries with access to scholarships, internships, leadership fellowships, and career clarity.",
   keywords: [
     "student growth hub",
-    "TSGH",
     "scholarships for african students",
     "fellowships",
     "internships",

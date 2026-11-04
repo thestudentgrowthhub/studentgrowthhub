@@ -84,7 +84,7 @@ export default function AdminPortalPage() {
             </div>
 
             <div className="space-y-1">
-              <h2 className="text-2xl font-bold tracking-tight">TSGH Team Portal</h2>
+              <h2 className="text-2xl font-bold tracking-tight">Student Growth Hub Team Portal</h2>
               <p className="text-xs text-slate-500">
                 Authorized administration for coordinators to publish opportunities &amp; manage deadlines without code.
               </p>
@@ -124,7 +124,7 @@ export default function AdminPortalPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200/80">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
-                  TSGH Administration Console
+                  Student Growth Hub Administration Console
                 </span>
                 <h1 className="text-3xl font-black text-slate-900 mt-1">
                   Content Management &amp; Intakes

@@ -15,13 +15,13 @@ export const COMMUNITY_GALLERY: GalleryImage[] = [
   {
     src: "/images/un-youth-delegates-group.jpg",
     title: "UN80 Youth Delegates Delegation",
-    subtitle: "TSGH student delegates representing youth voices in formal diplomatic sessions.",
+    subtitle: "Student Growth Hub delegates representing youth voices in formal diplomatic sessions.",
     category: "Youth Diplomacy",
   },
   {
     src: "/images/sdg4-quality-education-outreach.jpg",
     title: "SDG 4: Quality Education School Outreach",
-    subtitle: "TSGH youth leaders mentoring primary school children on education and SDG changemaking.",
+    subtitle: "Student Growth Hub youth leaders mentoring primary school children on education and SDG changemaking.",
     category: "SDG & School Outreach",
   },
   {
@@ -32,8 +32,8 @@ export const COMMUNITY_GALLERY: GalleryImage[] = [
   },
   {
     src: "/images/tsgh-founders-sdg-champions.jpg",
-    title: "TSGH Leaders Championing the UN SDGs",
-    subtitle: "Student leaders in official TSGH and EcoRise gear advocating for the 17 Global Goals.",
+    title: "Student Growth Hub Leaders Championing the UN SDGs",
+    subtitle: "Student leaders in official Student Growth Hub and EcoRise gear advocating for the 17 Global Goals.",
     category: "SDG & School Outreach",
   },
   {
@@ -45,7 +45,7 @@ export const COMMUNITY_GALLERY: GalleryImage[] = [
   {
     src: "/images/world-bank-earn-conference-delegates.jpg",
     title: "World Bank & E.A.R.N Conference Delegates",
-    subtitle: "TSGH community members participating in national economic and agricultural youth forums.",
+    subtitle: "Student Growth Hub community members participating in national economic and agricultural youth forums.",
     category: "Leadership & Summits",
   },
   {
@@ -56,7 +56,7 @@ export const COMMUNITY_GALLERY: GalleryImage[] = [
   },
   {
     src: "/images/campus-student-ambassadors-duo.jpg",
-    title: "TSGH Campus Student Ambassadors",
+    title: "Campus Student Ambassadors",
     subtitle: "Dedicated student ambassadors driving peer learning and opportunity awareness on campus.",
     category: "Campus & Mentorship",
   },
@@ -93,7 +93,7 @@ export const COMMUNITY_GALLERY: GalleryImage[] = [
   {
     src: "/images/summit-award-certificate-winners.jpg",
     title: "Best Delegate & Leadership Award Recipients",
-    subtitle: "Celebrating excellence as TSGH student delegates receive recognition certificates.",
+    subtitle: "Celebrating excellence as Student Growth Hub delegates receive recognition certificates.",
     category: "Leadership & Summits",
   },
   {

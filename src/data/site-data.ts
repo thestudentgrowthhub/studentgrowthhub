@@ -362,7 +362,7 @@ export const STUDENT_STORIES = [
     role: "Growth Beyond Grades Fellows & Campus Ambassadors",
     country: "Nigeria",
     quote:
-      "TSGH completely shifted our perspective on preparing for life after university. Through the Growth Beyond Grades cohort, we refined our CVs, gained leadership clarity, and secured remote internship placements!",
+      "The Student Growth Hub completely shifted our perspective on preparing for life after university. Through the Growth Beyond Grades cohort, we refined our CVs, gained leadership clarity, and secured remote internship placements!",
     image: "/images/campus-student-ambassadors-duo.jpg",
     badge: "Cohort 1 Alumni",
   },
@@ -371,7 +371,7 @@ export const STUDENT_STORIES = [
     role: "Youth Diplomats & Summit Delegates",
     country: "Kenya & Nigeria",
     quote:
-      "Being part of the TSGH community opened doors we never thought possible as undergraduates. The mentorship and weekly opportunities gave us the confidence to represent youth voices at international summits.",
+      "Being part of the Student Growth Hub community opened doors we never thought possible as undergraduates. The mentorship and weekly opportunities gave us the confidence to represent youth voices at international summits.",
     image: "/images/amnesty-international-youth-delegates.jpg",
     badge: "Global Summit Delegates",
   },
@@ -380,7 +380,7 @@ export const STUDENT_STORIES = [
     role: "SDG 4 & Climate Action Advocates",
     country: "Cameroon & Nigeria",
     quote:
-      "We learned how to turn student passion into measurable community action. TSGH connects you with changemakers across 37+ countries who are actively taking SDG education into local schools.",
+      "We learned how to turn student passion into measurable community action. The Student Growth Hub connects you with changemakers across 37+ countries who are actively taking SDG education into local schools.",
     image: "/images/tsgh-founders-sdg-champions.jpg",
     badge: "SDG Changemakers",
   },

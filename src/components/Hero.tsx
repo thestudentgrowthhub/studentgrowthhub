@@ -281,7 +281,7 @@ export function Hero() {
                 <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0 ring-2 ring-orange-400">
                   <Image
                     src="/images/campus-student-ambassadors-duo.jpg"
-                    alt="TSGH Campus Ambassadors"
+                    alt="Campus Ambassadors"
                     fill
                     sizes="44px"
                     className="object-cover"
@@ -313,7 +313,7 @@ export function Hero() {
             </span>
           </div>
           <span className="text-xs font-semibold text-blue-600 hidden sm:inline">
-            Hover to pause • Authentic TSGH moments across Africa &amp; beyond
+            Hover to pause • Authentic community moments across Africa &amp; beyond
           </span>
         </div>
 

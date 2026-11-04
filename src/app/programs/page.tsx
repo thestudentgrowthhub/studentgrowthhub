@@ -22,7 +22,7 @@ export default function ProgramsPage() {
                 Empowerment Programs Built for Real-World Impact
               </h1>
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-normal">
-                From employability and mental resilience cohorts to virtual work simulations and monthly expert masterclasses, TSGH equips young people with the competence to lead.
+                From employability and mental resilience cohorts to virtual work simulations and monthly expert masterclasses, The Student Growth Hub equips young people with the competence to lead.
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ export default function ProgramsPage() {
                   Institutional Partnerships
                 </span>
                 <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight">
-                  Partner With TSGH to Empower the Next Generation
+                  partner with The Student Growth Hub to Empower the Next Generation
                 </h3>
                 <p className="text-base sm:text-lg text-blue-50 leading-relaxed font-normal">
                   We collaborate with organizations, universities, and foundations (like The Reboot Wellbeing Foundation and Kryptr) to design high-impact student training programs across 37+ countries.

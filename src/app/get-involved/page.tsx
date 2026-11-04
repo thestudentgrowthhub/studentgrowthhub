@@ -70,7 +70,7 @@ export default function GetInvolvedPage() {
               <span>Shape the Future with Us</span>
             </div>
             <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-              Get Involved with TSGH
+              Get Involved With The Student Growth Hub
             </h1>
             <p className="text-base sm:text-xl text-slate-600 leading-relaxed font-normal">
               Whether you want to volunteer, join our Youth Advisory Board, partner as an organization, or ask questions, we&apos;d love to connect.
@@ -136,13 +136,13 @@ export default function GetInvolvedPage() {
                     {activeTab === "volunteer" && "Volunteer With The Student Growth Hub"}
                     {activeTab === "yab" && "Apply for the Youth Advisory Board (YAB)"}
                     {activeTab === "partner" && "Institutional & Corporate Partnership"}
-                    {activeTab === "contact" && "Get in Touch with TSGH Team"}
+                    {activeTab === "contact" && "Get in Touch With The Student Growth Hub Team"}
                   </h3>
                   <p className="text-sm sm:text-base text-slate-600 mt-2 font-normal leading-relaxed">
                     {activeTab === "volunteer" &&
                       "Join our passionate team of student moderators, content creators, event hosts, and opportunity curators across 37+ countries."}
                     {activeTab === "yab" &&
-                      "Provide strategic guidance, advocate for student policies, and help shape TSGH's international roadmap."}
+                      "Provide strategic guidance, advocate for student policies, and help shape The Student Growth Hub's international roadmap."}
                     {activeTab === "partner" &&
                       "Collaborate on joint training cohorts, virtual internships, scholarships, and SDG impact initiatives."}
                     {activeTab === "contact" &&
@@ -230,7 +230,7 @@ export default function GetInvolvedPage() {
                   <label className="block text-sm font-bold text-slate-700 mb-2">
                     {activeTab === "volunteer" && "Why do you want to volunteer and what role interests you? *"}
                     {activeTab === "yab" && "Tell us about your leadership experience and vision for TSGH *"}
-                    {activeTab === "partner" && "How would your organization like to collaborate with TSGH? *"}
+                    {activeTab === "partner" && "How would your organization like to collaborate With The Student Growth Hub? *"}
                     {activeTab === "contact" && "Your Message *"}
                   </label>
                   <textarea

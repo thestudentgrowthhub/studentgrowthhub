@@ -24,7 +24,7 @@ const INITIAL_MESSAGES: Message[] = [
     id: "welcome",
     role: "assistant",
     content:
-      "Hello! 👋 I'm your **TSGH AI Student Advisor**. Whether you're looking for verified scholarships, want to join **Growth Beyond Grades**, or need virtual work experience through **ELITE Campus × Kryptr**, I'm here to help!",
+      "Hello! 👋 I'm your **AI Advisor** at **The Student Growth Hub**. Whether you're looking for verified scholarships, want to join **Growth Beyond Grades**, or need virtual work experience through **ELITE Campus × Kryptr**, I'm here to help!",
   },
 ];
 
@@ -32,7 +32,7 @@ const PROMPT_SUGGESTIONS = [
   "🎓 Find open scholarships",
   "🌱 What is Growth Beyond Grades?",
   "💼 How does ELITE Campus work?",
-  "🤝 How to volunteer with TSGH?",
+  "🤝 How to volunteer with us?",
   "💬 Join WhatsApp community",
 ];
 
@@ -206,10 +206,10 @@ export function Chatbot() {
           </div>
           <div className="min-w-0">
             <div className="text-xs font-bold text-slate-900">
-              TSGH Student Advisor
+              AI Advisor
             </div>
             <p className="text-xs text-slate-600 leading-snug mt-0.5">
-              Need help finding scholarships or program info? Ask me!
+              Need help finding scholarships or program info? Ask AI!
             </p>
           </div>
           <button
@@ -230,18 +230,18 @@ export function Chatbot() {
         <button
           onClick={() => setIsOpen(true)}
           className="group relative flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-          aria-label="Open TSGH AI Chatbot"
+          aria-label="Open AI Chatbot"
         >
           <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/40">
             <Image
               src="/images/tsgh-official-logo.jpg"
-              alt="TSGH Logo"
+              alt="The Student Growth Hub"
               fill
               sizes="24px"
               className="object-cover"
             />
           </div>
-          <span className="text-xs sm:text-sm font-bold tracking-tight">Ask TSGH AI</span>
+          <span className="text-xs sm:text-sm font-bold tracking-tight">Ask AI</span>
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-300"></span>
@@ -259,7 +259,7 @@ export function Chatbot() {
               <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-white/80 shrink-0">
                 <Image
                   src="/images/tsgh-official-logo.jpg"
-                  alt="TSGH AI Advisor"
+                  alt="AI Advisor"
                   fill
                   sizes="36px"
                   className="object-cover"
@@ -267,12 +267,12 @@ export function Chatbot() {
               </div>
               <div>
                 <div className="flex items-center gap-1.5">
-                  <h3 className="text-xs sm:text-sm font-black leading-tight">TSGH AI Advisor</h3>
+                  <h3 className="text-xs sm:text-sm font-black leading-tight">AI</h3>
                   <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 text-white font-bold">
-                    Gemini AI
+                    Student Advisor
                   </span>
                 </div>
-                <p className="text-[11px] text-blue-100">Beyond Grades. Beyond Limitations.</p>
+                <p className="text-[11px] text-blue-100">The Student Growth Hub</p>
               </div>
             </div>
 
@@ -341,7 +341,7 @@ export function Chatbot() {
                   <span className="w-2 h-2 rounded-full bg-blue-500 animate-bounce" />
                   <span className="w-2 h-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.2s]" />
                   <span className="w-2 h-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.4s]" />
-                  <span className="text-xs ml-1">Consulting TSGH Advisor...</span>
+                  <span className="text-xs ml-1">AI is thinking...</span>
                 </div>
               </div>
             )}
@@ -375,7 +375,7 @@ export function Chatbot() {
             >
               <input
                 type="text"
-                placeholder="Ask about scholarships, cohorts, Kryptr..."
+                placeholder="Ask AI about scholarships, cohorts, Kryptr..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isLoading}

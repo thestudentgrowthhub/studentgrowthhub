@@ -36,7 +36,7 @@ export default function HomePage() {
                   <div className="col-span-7 relative aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200/80 group">
                     <Image
                       src="/images/tsgh-founders-sdg-champions.jpg"
-                      alt="TSGH Founders & SDG Champions"
+                      alt="The Student Growth Hub Founders & SDG Champions"
                       fill
                       sizes="(max-width: 1024px) 60vw, 340px"
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -95,11 +95,11 @@ export default function HomePage() {
                 </h2>
 
                 <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-                  The Student Growth Hub (TSGH) was established to help students grow beyond the classroom. We believe academic excellence, while important, is only one part of a student&apos;s preparation for life.
+                  The Student Growth Hub was established to help students grow beyond the classroom. We believe academic excellence, while important, is only one part of a student&apos;s preparation for life.
                 </p>
 
                 <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-                  Students need practical workplace skills, mentorship, leadership experience, and access to life-changing opportunities. TSGH bridges this gap by creating an international ecosystem where students discover verified scholarships, master digital skills, and become intentional changemakers in society.
+                  Students need practical workplace skills, mentorship, leadership experience, and access to life-changing opportunities. The Student Growth Hub bridges this gap by creating an international ecosystem where students discover verified scholarships, master digital skills, and become intentional changemakers in society.
                 </p>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">

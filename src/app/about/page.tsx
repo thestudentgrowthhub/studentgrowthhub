@@ -50,7 +50,7 @@ export default function AboutPage() {
                 Empowering Students to Thrive Beyond the Classroom
               </h1>
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-normal">
-                The Student Growth Hub (TSGH) was founded on a simple conviction: a student&apos;s potential should never be defined solely by academic grades, financial background, or geographic limitations.
+                The Student Growth Hub was founded on a simple conviction: a student&apos;s potential should never be defined solely by academic grades, financial background, or geographic limitations.
               </p>
             </div>
 

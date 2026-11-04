@@ -6,11 +6,12 @@ interface ChatMessage {
   content: string;
 }
 
-const TSGH_SYSTEM_PROMPT = `
-You are the official AI Student Advisor for "The Student Growth Hub" (TSGH).
+const AI_SYSTEM_PROMPT = `
+You are the official AI Advisor for "The Student Growth Hub".
+Never use the acronym "TSGH" — always refer to yourself simply as "AI" or "AI Advisor" and the organization as "The Student Growth Hub".
 Your goal is to warmly and expertly guide students, changemakers, and partners.
 
-Core TSGH Identity:
+Core Identity:
 - Motto: "Beyond Grades. Beyond Limitations." and "Discover. Learn. Grow. Lead."
 - Mission: Empowering students across 37+ countries with knowledge, skills, opportunities, mentorship, and supportive networks to thrive beyond the classroom.
 - 6 Strategic Pillars:
@@ -40,7 +41,7 @@ ${OPPORTUNITIES.map(
 Guidelines:
 - Keep responses friendly, encouraging, actionable, and concise (2-4 short paragraphs or bullet points).
 - Whenever mentioning scholarships, programs, or volunteering, mention the relevant site page or link.
-- Emphasize that all opportunities on TSGH are 100% verified and free to discover.
+- Emphasize that all opportunities on The Student Growth Hub are 100% verified and free to discover.
 `;
 
 export async function POST(req: NextRequest) {
@@ -64,11 +65,11 @@ export async function POST(req: NextRequest) {
         const contents = [
           {
             role: "user",
-            parts: [{ text: `SYSTEM INSTRUCTIONS:\n${TSGH_SYSTEM_PROMPT}\n\nPlease acknowledge and assist the student.` }],
+            parts: [{ text: `SYSTEM INSTRUCTIONS:\n${AI_SYSTEM_PROMPT}\n\nPlease acknowledge and assist the student.` }],
           },
           {
             role: "model",
-            parts: [{ text: "Understood. I am the TSGH AI Student Advisor, ready to help students discover opportunities, programs, and community networks." }],
+            parts: [{ text: "Understood. I am the AI Advisor for The Student Growth Hub, ready to help students discover opportunities, programs, and community networks." }],
           },
           ...messages.slice(-6).map((m) => ({
             role: m.role === "assistant" ? "model" : "user",
@@ -96,11 +97,11 @@ export async function POST(req: NextRequest) {
           }
         }
       } catch (err) {
-        console.warn("Gemini API call failed, falling back to local TSGH engine:", err);
+        console.warn("Gemini API call failed, falling back to local knowledge base:", err);
       }
     }
 
-    // Dual-Mode 2: High-Quality Built-in TSGH Knowledge Base Fallback
+    // Dual-Mode 2: High-Quality Built-in Knowledge Base Fallback
     const fallbackReply = generateFallbackReply(latestUserMessage);
     return NextResponse.json({ reply: fallbackReply, source: "local_knowledge_base" });
   } catch (error) {
@@ -117,7 +118,7 @@ function generateFallbackReply(query: string): string {
 
   if (q.includes("scholarship") || q.includes("grant") || q.includes("funding")) {
     return (
-      "🎓 **Verified Scholarships on TSGH:**\n\n" +
+      "🎓 **Verified Scholarships:**\n\n" +
       "We curate fully funded international scholarships for ambitious students! Top open opportunities include:\n" +
       "• **Chevening UK Government Master's Scholarship** (Fully Funded UK tuition + monthly stipend)\n" +
       "• **Generation Google Scholarship EMEA** (€7,000 for Computer Science & Tech students)\n\n" +
@@ -151,7 +152,7 @@ function generateFallbackReply(query: string): string {
 
   if (q.includes("volunteer") || q.includes("yab") || q.includes("youth advisory") || q.includes("join team")) {
     return (
-      "🤝 **Join the TSGH Global Team:**\n\n" +
+      "🤝 **Join The Student Growth Hub Team:**\n\n" +
       "We welcome passionate students as moderators, content creators, and Youth Advisory Board (YAB) members across 37+ countries.\n\n" +
       "Head to our [Get Involved Portal](/get-involved) to submit your intake form. Our coordination team reviews applications weekly!"
     );
@@ -173,8 +174,8 @@ function generateFallbackReply(query: string): string {
 
   // General helpful response
   return (
-    "👋 Hello! Welcome to **The Student Growth Hub (TSGH)** — *Beyond Grades. Beyond Limitations.*\n\n" +
-    "I can help you with:\n" +
+    "👋 Hello! Welcome to **The Student Growth Hub** — *Beyond Grades. Beyond Limitations.*\n\n" +
+    "I'm your **AI Advisor**, and I can help you with:\n" +
     "1. 🎓 Discovering verified scholarships, internships, and fellowships on our [Opportunities Hub](/opportunities)\n" +
     "2. 🌱 Learning about our **Growth Beyond Grades** cohort training on our [Programs Page](/programs)\n" +
     "3. 💼 Gaining virtual work experience through **ELITE Campus × Kryptr**\n" +
@@ -182,4 +183,3 @@ function generateFallbackReply(query: string): string {
     "What area of your student journey would you like to explore?"
   );
 }
-

@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         <h1 className="text-3xl font-black text-slate-900 dark:text-white">Privacy Policy</h1>
         <div className="prose dark:prose-invert text-sm text-slate-600 dark:text-slate-300 space-y-4 leading-relaxed">
           <p>
-            At The Student Growth Hub (TSGH), accessible from our digital platforms, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by TSGH and how we use it.
+            At The Student Growth Hub, accessible from our digital platforms, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by TSGH and how we use it.
           </p>
           <h3 className="text-base font-bold text-slate-900 dark:text-white">Information We Collect</h3>
           <p>
