@@ -1,28 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FLAGSHIP_PROGRAMS } from "@/data/site-data";
-import { ArrowUpRight, CheckCircle2, Clock, Globe } from "lucide-react";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
 
 export function ProgramsSection() {
   return (
-    <section className="py-20 bg-white dark:bg-slate-900">
+    <section className="py-20 sm:py-28 bg-white border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+          <span className="text-xs sm:text-sm font-bold text-emerald-600 uppercase tracking-wider block mb-2">
             Flagship Initiatives
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-1 tracking-tight">
-            Programs Designed for Measurable Growth
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            Programs Designed for Real-World Growth
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2">
-            Hands-on learning cohorts, virtual work simulations, and expert masterclasses providing verifiable real-world skills.
+          <p className="text-base sm:text-xl text-slate-600 mt-3 leading-relaxed">
+            Hands-on learning cohorts, virtual work simulations, and international summits providing verifiable skills.
           </p>
         </div>
 
         {/* Programs Grid */}
-        <div className="space-y-12">
+        <div className="space-y-12 sm:space-y-16">
           {FLAGSHIP_PROGRAMS.map((program, idx) => {
             const isEven = idx % 2 === 1;
 
@@ -30,91 +30,98 @@ export function ProgramsSection() {
               <div
                 key={program.id}
                 id={program.slug}
-                className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                className="rounded-3xl border border-slate-200/90 bg-gradient-to-br from-slate-50/80 via-white to-blue-50/40 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
               >
-                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-8 lg:p-10 ${isEven ? "lg:flex-row-reverse" : ""}`}>
+                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center p-6 sm:p-10 lg:p-12 ${isEven ? "lg:flex-row-reverse" : ""}`}>
                   
-                  {/* Image Column */}
-                  <div className={`lg:col-span-5 relative aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-slate-200 dark:border-slate-800 ${isEven ? "lg:order-2" : ""}`}>
-                    <Image
-                      src={program.image}
-                      alt={program.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 450px"
-                      className="object-cover transition-transform duration-300 hover:scale-105"
-                    />
-                    <div className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full border border-white/20">
-                      {program.badge}
+                  {/* Dynamic Dual-Image Collage Column */}
+                  <div className={`lg:col-span-5 relative ${isEven ? "lg:order-2" : ""}`}>
+                    <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-lg border-4 border-white bg-blue-50">
+                      <Image
+                        src={program.image}
+                        alt={program.title}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 500px"
+                        className="object-cover transition-transform duration-500 hover:scale-105"
+                      />
+                      <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3.5 py-1.5 rounded-full shadow-md">
+                        {program.badge}
+                      </div>
                     </div>
+
+                    {/* Secondary Picture Inset */}
+                    {program.secondaryImage && (
+                      <div className="hidden sm:block absolute -bottom-5 -right-4 w-36 h-28 rounded-2xl overflow-hidden border-4 border-white shadow-xl bg-white">
+                        <Image
+                          src={program.secondaryImage}
+                          alt={`${program.title} activity`}
+                          fill
+                          sizes="144px"
+                          className="object-cover"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   {/* Content Column */}
-                  <div className={`lg:col-span-7 space-y-4 ${isEven ? "lg:order-1" : ""}`}>
+                  <div className={`lg:col-span-7 space-y-5 ${isEven ? "lg:order-1" : ""}`}>
                     {program.partner && (
-                      <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-orange-600 dark:text-orange-400 bg-orange-50 dark:bg-orange-950/40 px-3 py-1 rounded-full border border-orange-200 dark:border-orange-800/40">
+                      <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-orange-700 bg-orange-50 px-4 py-1.5 rounded-full border border-orange-200">
                         <span>{program.partner}</span>
                       </div>
                     )}
 
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-snug">
                       {program.title}
                     </h3>
-                    <p className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                    <p className="text-sm sm:text-base font-bold text-emerald-600">
                       {program.subtitle}
                     </p>
-                    <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                    <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
                       {program.description}
                     </p>
 
                     {/* Highlights List */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                       {program.highlights.map((h) => (
-                        <div key={h} className="flex items-start gap-2 text-xs text-slate-600 dark:text-slate-300">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+                        <div key={h} className="flex items-start gap-2.5 text-sm sm:text-base text-slate-700">
+                          <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
                           <span>{h}</span>
                         </div>
                       ))}
                     </div>
 
                     {/* Metrics Bar */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-3 border-t border-slate-200/60 dark:border-slate-800">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-slate-200/80">
                       {program.impactMetrics.map((m) => (
-                        <div key={m.label} className="bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-800 text-center">
-                          <div className="text-[10px] text-slate-400 uppercase font-medium truncate">{m.label}</div>
-                          <div className="text-xs font-bold text-slate-900 dark:text-white mt-0.5 truncate">{m.value}</div>
+                        <div key={m.label} className="bg-white p-3.5 rounded-2xl border border-slate-200/80 text-center shadow-2xs">
+                          <div className="text-xs text-slate-500 uppercase font-bold tracking-wider truncate">{m.label}</div>
+                          <div className="text-sm sm:text-base font-black text-blue-950 mt-1 truncate">{m.value}</div>
                         </div>
                       ))}
                     </div>
 
-                    {/* Action Button */}
-                    <div className="pt-3 flex flex-wrap items-center gap-4">
+                    {/* Action Button (Bright Blue / Emerald, no black) */}
+                    <div className="pt-4 flex flex-wrap items-center gap-4">
                       {program.actionUrl.startsWith("http") ? (
                         <a
                           href={program.actionUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 hover:bg-slate-800 text-white dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100 transition-all shadow-xs group"
+                          className="min-h-[50px] inline-flex items-center px-7 py-3.5 rounded-2xl text-base font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-md shadow-blue-600/20 group"
                         >
                           <span>{program.actionText}</span>
-                          <ArrowUpRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </a>
                       ) : (
                         <Link
                           href={program.actionUrl}
-                          className="inline-flex items-center px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 hover:bg-blue-700 text-white transition-all shadow-xs group"
+                          className="min-h-[50px] inline-flex items-center px-7 py-3.5 rounded-2xl text-base font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition-all shadow-md shadow-emerald-600/20 group"
                         >
                           <span>{program.actionText}</span>
-                          <ArrowUpRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          <ArrowUpRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         </Link>
                       )}
-
-                      <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-                        <Clock className="w-3.5 h-3.5 text-blue-500" />
-                        <span>{program.duration}</span>
-                        <span>•</span>
-                        <Globe className="w-3.5 h-3.5 text-emerald-500" />
-                        <span>{program.status}</span>
-                      </div>
                     </div>
 
                   </div>
@@ -129,4 +136,3 @@ export function ProgramsSection() {
     </section>
   );
 }
-

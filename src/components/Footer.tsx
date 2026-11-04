@@ -18,40 +18,42 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-slate-950 text-slate-200 border-t border-slate-800">
+    <footer className="bg-white text-slate-700 border-t border-slate-200">
       {/* Top Banner: Newsletter */}
-      <div className="border-b border-slate-800/80 bg-slate-900/60 py-10">
+      <div className="border-b border-slate-200/80 bg-blue-50/60 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="max-w-xl text-center lg:text-left">
-              <span className="text-xs font-bold text-orange-400 tracking-wider uppercase">Stay Updated</span>
-              <h3 className="text-xl sm:text-2xl font-bold text-white mt-1">
+              <span className="text-xs sm:text-sm font-bold text-orange-600 tracking-wider uppercase block mb-1">
+                Stay Updated
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
                 Get Weekly Verified Scholarships &amp; Opportunities
               </h3>
-              <p className="text-sm text-slate-400 mt-1">
+              <p className="text-base text-slate-600 mt-2 font-normal">
                 Join 1,500+ students receiving curated fellowship deadlines, internships, and skill masterclasses directly.
               </p>
             </div>
 
             <div className="w-full lg:w-auto">
               {subscribed ? (
-                <div className="flex items-center gap-2 p-3 bg-emerald-950/80 border border-emerald-500/50 rounded-xl text-emerald-300 text-sm font-medium">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+                <div className="flex items-center gap-2.5 p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-base font-semibold">
+                  <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
                   <span>You’re subscribed! Watch your inbox for upcoming deadlines.</span>
                 </div>
               ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-2 max-w-md w-full">
+                <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-3 max-w-md w-full">
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your student email..."
                     required
-                    className="px-4 py-3 rounded-xl bg-slate-800/90 border border-slate-700 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[260px]"
+                    className="px-5 py-3.5 rounded-2xl bg-white border border-slate-300 text-slate-900 placeholder-slate-400 text-base focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[280px] shadow-2xs"
                   />
                   <button
                     type="submit"
-                    className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all duration-150 inline-flex items-center justify-center gap-2 shadow-sm shrink-0"
+                    className="min-h-[48px] px-6 py-3.5 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base transition-all duration-150 inline-flex items-center justify-center gap-2 shadow-sm shrink-0"
                   >
                     <span>Subscribe</span>
                     <Send className="w-4 h-4" />
@@ -64,98 +66,98 @@ export function Footer() {
       </div>
 
       {/* Main Footer Directory */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           
           {/* Col 1: Identity & Motto */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden ring-2 ring-emerald-500/40">
+          <div className="lg:col-span-2 space-y-5">
+            <Link href="/" className="flex items-center space-x-3.5">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-blue-500/30 shadow-xs">
                 <Image
-                  src="/images/logo.jpg"
+                  src="/images/tsgh-official-logo.jpg"
                   alt="The Student Growth Hub"
                   fill
-                  sizes="40px"
+                  sizes="48px"
                   className="object-cover"
                 />
               </div>
               <div>
-                <span className="font-extrabold text-base tracking-tight text-white block">
-                  THE STUDENT <span className="text-orange-400">GROWTH HUB</span>
+                <span className="font-black text-lg tracking-tight text-slate-900 block">
+                  THE STUDENT <span className="text-orange-500">GROWTH HUB</span>
                 </span>
-                <span className="text-xs text-emerald-400 font-medium">Beyond Grades. Beyond Limitations.</span>
+                <span className="text-xs sm:text-sm text-emerald-600 font-bold">Beyond Grades. Beyond Limitations.</span>
               </div>
             </Link>
 
-            <p className="text-sm text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-base text-slate-600 leading-relaxed max-w-sm font-normal">
               A youth-led global student development platform established to help students grow beyond the classroom through access to opportunities, practical skills, mentorship, and supportive networks across 37+ countries.
             </p>
 
-            <div className="flex items-center space-x-3 pt-2">
+            <div className="flex items-center space-x-3.5 pt-2">
               <a
                 href={COMMUNITY_LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-emerald-600 flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-sm"
+                className="w-12 h-12 rounded-2xl bg-emerald-50 hover:bg-emerald-600 border border-emerald-200 flex items-center justify-center text-emerald-700 hover:text-white transition-all shadow-xs"
                 aria-label="WhatsApp Community"
               >
-                <MessageCircle className="w-5 h-5 fill-current" />
+                <MessageCircle className="w-6 h-6 fill-current" />
               </a>
               <a
                 href={COMMUNITY_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-slate-800 hover:bg-blue-600 flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-sm"
+                className="w-12 h-12 rounded-2xl bg-blue-50 hover:bg-blue-600 border border-blue-200 flex items-center justify-center text-blue-700 hover:text-white transition-all shadow-xs"
                 aria-label="LinkedIn Page"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-6 h-6" />
               </a>
             </div>
           </div>
 
           {/* Col 2: Navigation */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Explore</h4>
-            <ul className="space-y-2.5 text-sm">
+            <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-5">Explore</h4>
+            <ul className="space-y-3 text-sm sm:text-base font-medium">
               <li>
-                <Link href="/" className="text-slate-400 hover:text-white transition-colors">Home</Link>
+                <Link href="/" className="text-slate-600 hover:text-blue-600 transition-colors">Home</Link>
               </li>
               <li>
-                <Link href="/about" className="text-slate-400 hover:text-white transition-colors">About Us</Link>
+                <Link href="/about" className="text-slate-600 hover:text-blue-600 transition-colors">About Us</Link>
               </li>
               <li>
-                <Link href="/programs" className="text-slate-400 hover:text-white transition-colors">Our Programs</Link>
+                <Link href="/programs" className="text-slate-600 hover:text-blue-600 transition-colors">Our Programs</Link>
               </li>
               <li>
-                <Link href="/opportunities" className="text-slate-400 hover:text-white transition-colors">Opportunities Hub</Link>
+                <Link href="/opportunities" className="text-slate-600 hover:text-blue-600 transition-colors">Opportunities Hub</Link>
               </li>
               <li>
-                <Link href="/programs#webinars" className="text-slate-400 hover:text-white transition-colors">Events &amp; Webinars</Link>
+                <Link href="/programs#webinars" className="text-slate-600 hover:text-blue-600 transition-colors">Events &amp; Webinars</Link>
               </li>
             </ul>
           </div>
 
           {/* Col 3: Programs & Pillars */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Flagship Initiatives</h4>
-            <ul className="space-y-2.5 text-sm">
+            <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-5">Flagship Initiatives</h4>
+            <ul className="space-y-3 text-sm sm:text-base font-medium">
               <li>
-                <Link href="/programs#growth-beyond-grades" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/programs#growth-beyond-grades" className="text-slate-600 hover:text-blue-600 transition-colors">
                   Growth Beyond Grades
                 </Link>
               </li>
               <li>
-                <Link href="/programs#elite-campus" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/programs#elite-campus" className="text-slate-600 hover:text-blue-600 transition-colors">
                   ELITE Campus × Kryptr
                 </Link>
               </li>
               <li>
-                <Link href="/about#pillars" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/about#pillars" className="text-slate-600 hover:text-blue-600 transition-colors">
                   6 Strategic Pillars
                 </Link>
               </li>
               <li>
-                <Link href="/about#impact" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/about#impact" className="text-slate-600 hover:text-blue-600 transition-colors">
                   Global Impact Metrics
                 </Link>
               </li>
@@ -164,25 +166,25 @@ export function Footer() {
 
           {/* Col 4: Get Involved & Governance */}
           <div>
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Get Involved</h4>
-            <ul className="space-y-2.5 text-sm">
+            <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-slate-900 mb-5">Get Involved</h4>
+            <ul className="space-y-3 text-sm sm:text-base font-medium">
               <li>
-                <Link href="/get-involved?tab=volunteer" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/get-involved?tab=volunteer" className="text-slate-600 hover:text-blue-600 transition-colors">
                   Volunteer With Us
                 </Link>
               </li>
               <li>
-                <Link href="/get-involved?tab=yab" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/get-involved?tab=yab" className="text-slate-600 hover:text-blue-600 transition-colors">
                   Youth Advisory Board
                 </Link>
               </li>
               <li>
-                <Link href="/get-involved?tab=partner" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/get-involved?tab=partner" className="text-slate-600 hover:text-blue-600 transition-colors">
                   Institutional Partnerships
                 </Link>
               </li>
               <li>
-                <Link href="/get-involved?tab=contact" className="text-slate-400 hover:text-white transition-colors">
+                <Link href="/get-involved?tab=contact" className="text-slate-600 hover:text-blue-600 transition-colors">
                   Contact Us
                 </Link>
               </li>
@@ -192,14 +194,14 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Legal */}
-        <div className="pt-10 mt-10 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p className="flex items-center gap-1">
+        <div className="pt-10 mt-12 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-5 text-sm text-slate-500">
+          <p className="flex items-center gap-1 font-normal">
             © {new Date().getFullYear()} The Student Growth Hub (TSGH). Built for youth changemakers worldwide.
           </p>
-          <div className="flex items-center space-x-6">
-            <Link href="/legal/privacy" className="hover:text-slate-200 transition-colors">Privacy Policy</Link>
-            <Link href="/legal/terms" className="hover:text-slate-200 transition-colors">Terms &amp; Conditions</Link>
-            <a href={COMMUNITY_LINKS.whatsapp} target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300">
+          <div className="flex items-center space-x-6 font-semibold">
+            <Link href="/legal/privacy" className="hover:text-blue-600 transition-colors">Privacy Policy</Link>
+            <Link href="/legal/terms" className="hover:text-blue-600 transition-colors">Terms &amp; Conditions</Link>
+            <a href={COMMUNITY_LINKS.whatsapp} target="_blank" rel="noopener noreferrer" className="text-emerald-600 hover:text-emerald-700">
               WhatsApp Community
             </a>
           </div>
@@ -208,4 +210,3 @@ export function Footer() {
     </footer>
   );
 }
-

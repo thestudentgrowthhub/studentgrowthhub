@@ -7,22 +7,22 @@ import { COMMUNITY_LINKS } from "@/data/site-data";
 
 export default function ProgramsPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50/30 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen flex flex-col bg-slate-50/40 text-slate-900">
       <Navbar />
 
       <main className="flex-1">
         {/* Programs Header */}
-        <section className="py-16 lg:py-24 bg-white dark:bg-slate-900 border-b border-slate-200/80 dark:border-slate-800">
+        <section className="py-20 lg:py-28 bg-white border-b border-slate-200/80 bg-ambient-light">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center space-y-4">
-              <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">
+            <div className="max-w-3xl mx-auto text-center space-y-5">
+              <span className="text-xs sm:text-sm font-bold text-emerald-600 uppercase tracking-wider block mb-1">
                 Action-Oriented Learning
               </span>
-              <h1 className="text-4xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-tight">
                 Empowerment Programs Built for Real-World Impact
               </h1>
-              <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-                From employability and mental resilience cohorts to virtual work simulations and monthly expert webinars, TSGH equips young people with the competence to lead.
+              <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-normal">
+                From employability and mental resilience cohorts to virtual work simulations and monthly expert masterclasses, TSGH equips young people with the competence to lead.
               </p>
             </div>
           </div>
@@ -31,26 +31,26 @@ export default function ProgramsPage() {
         {/* Programs Detailed Showcase */}
         <ProgramsSection />
 
-        {/* Partnership Callout Banner */}
-        <section className="py-16 bg-slate-100/70 dark:bg-slate-950 border-t border-slate-200/80 dark:border-slate-800">
+        {/* Partnership Callout Banner (Vibrant Royal Blue & Emerald instead of Black) */}
+        <section className="py-20 bg-soft-mesh border-t border-slate-200/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="rounded-3xl bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-8 sm:p-12 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
-              <div className="max-w-2xl space-y-3 text-center lg:text-left">
-                <span className="text-xs font-bold uppercase tracking-wider text-orange-400">
+            <div className="rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-600 to-emerald-600 text-white p-8 sm:p-12 lg:p-16 shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="max-w-2xl space-y-4 text-center lg:text-left">
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-amber-200 block">
                   Institutional Partnerships
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-                  Partner With TSGH to Train the Next Cohort
+                <h3 className="text-2xl sm:text-4xl font-black text-white leading-tight">
+                  Partner With TSGH to Empower the Next Generation
                 </h3>
-                <p className="text-sm text-slate-300 leading-relaxed">
+                <p className="text-base sm:text-lg text-blue-50 leading-relaxed font-normal">
                   We collaborate with organizations, universities, and foundations (like The Reboot Wellbeing Foundation and Kryptr) to design high-impact student training programs across 37+ countries.
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto shrink-0">
+              <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto shrink-0">
                 <Link
                   href="/get-involved?tab=partner"
-                  className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white text-slate-900 hover:bg-slate-100 transition-all text-center shadow-md"
+                  className="min-h-[50px] px-8 py-4 rounded-2xl font-bold text-base bg-white text-blue-700 hover:bg-blue-50 transition-all text-center shadow-lg"
                 >
                   Become a Partner
                 </Link>
@@ -58,7 +58,7 @@ export default function ProgramsPage() {
                   href={COMMUNITY_LINKS.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 rounded-xl font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white transition-all text-center shadow-md"
+                  className="min-h-[50px] px-8 py-4 rounded-2xl font-bold text-base bg-emerald-500 hover:bg-emerald-400 text-white transition-all text-center shadow-lg"
                 >
                   Join Community
                 </a>
@@ -75,4 +75,3 @@ export default function ProgramsPage() {
     </div>
   );
 }
-

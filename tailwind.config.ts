@@ -6,18 +6,23 @@ export default {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "'Plus Jakarta Sans'",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "'Segoe UI'",
+          "Roboto",
+          "sans-serif",
+        ],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
         tsgh: {
-          navy: {
-            DEFAULT: "#0F172A",
-            light: "#1E293B",
-            deep: "#070D18",
-          },
           blue: {
             DEFAULT: "#1D4ED8",
             light: "#3B82F6",
@@ -33,20 +38,11 @@ export default {
             light: "#FB923C",
             dark: "#EA580C",
           },
-          cyan: {
-            DEFAULT: "#0EA5E9",
-            light: "#38BDF8",
-            dark: "#0284C7",
-          },
         },
-      },
-      fontFamily: {
-        sans: ["var(--font-geist-sans)", "Inter", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "monospace"],
       },
       animation: {
         "pulse-subtle": "pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "fade-in": "fadeIn 0.5s ease-out forwards",
+        "fade-in": "fadeIn 0.4s ease-out forwards",
       },
       keyframes: {
         fadeIn: {

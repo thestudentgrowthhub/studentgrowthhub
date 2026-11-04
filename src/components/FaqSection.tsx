@@ -49,41 +49,41 @@ export function FaqSection() {
   };
 
   return (
-    <section className="py-20 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800/80">
+    <section className="py-20 sm:py-28 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800/80">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs font-semibold mb-2">
-            <HelpCircle className="w-3.5 h-3.5" />
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 text-xs sm:text-sm font-bold mb-3">
+            <HelpCircle className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span>Got Questions?</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
             Frequently Asked Questions
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mt-2">
+          <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
             Everything you need to know about joining TSGH, our cohort initiatives, and our verified opportunities.
           </p>
         </div>
 
         {/* Accordion Container */}
-        <div className="space-y-3">
+        <div className="space-y-4">
           {FAQS.map((faq, idx) => {
             const isOpen = openIndex === idx;
 
             return (
               <div
                 key={idx}
-                className="rounded-2xl border border-slate-200/80 dark:border-slate-800 overflow-hidden bg-slate-50/40 dark:bg-slate-800/20 transition-colors"
+                className="rounded-3xl border border-slate-200/80 dark:border-slate-800 overflow-hidden bg-slate-50/50 dark:bg-slate-800/25 transition-colors"
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                  className="w-full min-h-[58px] p-6 text-left flex items-center justify-between gap-4 font-bold text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-sm sm:text-base">{faq.question}</span>
+                  <span className="text-base sm:text-lg">{faq.question}</span>
                   <div
-                    className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700 transition-transform duration-200 ${
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700 transition-transform duration-200 ${
                       isOpen ? "rotate-180 bg-blue-600 text-white border-blue-600" : "text-slate-400"
                     }`}
                   >
@@ -92,7 +92,7 @@ export function FaqSection() {
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800/80 animate-fade-in">
+                  <div className="px-6 pb-6 pt-1 text-base text-slate-700 dark:text-slate-300 leading-relaxed border-t border-slate-100 dark:border-slate-800 animate-fade-in font-normal">
                     {faq.answer}
                   </div>
                 )}

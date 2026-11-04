@@ -1,18 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { JsonLd } from "@/components/JsonLd";
 import { Chatbot } from "@/components/Chatbot";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://studentgrowthhub.org"),
@@ -31,8 +20,8 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "The Student Growth Hub Team" }],
   icons: {
-    icon: "/images/logo.jpg",
-    apple: "/images/logo.jpg",
+    icon: "/images/tsgh-official-logo.jpg",
+    apple: "/images/tsgh-official-logo.jpg",
   },
   openGraph: {
     title: "The Student Growth Hub | Beyond Grades. Beyond Limitations.",
@@ -42,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "The Student Growth Hub",
     images: [
       {
-        url: "/images/logo.jpg",
+        url: "/images/tsgh-official-logo.jpg",
         width: 640,
         height: 640,
         alt: "The Student Growth Hub Logo",
@@ -54,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0f172a",
+  themeColor: "#ffffff",
   width: "device-width",
   initialScale: 1,
 };
@@ -66,9 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-orange-500 selection:text-white`}
-      >
+      <body className="font-sans antialiased selection:bg-blue-600 selection:text-white bg-slate-50 text-slate-900">
         <JsonLd />
         {children}
         <Chatbot />

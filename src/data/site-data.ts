@@ -31,6 +31,7 @@ export interface Program {
   actionText: string;
   actionUrl: string;
   image: string;
+  secondaryImage?: string;
 }
 
 export interface StrategicPillar {
@@ -39,6 +40,8 @@ export interface StrategicPillar {
   description: string;
   iconName: string;
   accentColor: string;
+  image: string;
+  highlightStat: string;
 }
 
 export const SITE_METRICS = [
@@ -55,41 +58,53 @@ export const STRATEGIC_PILLARS: StrategicPillar[] = [
     description: "Developing effective study habits, learning strategies, academic confidence, and the growth mindset to excel in higher education.",
     iconName: "GraduationCap",
     accentColor: "from-blue-600 to-indigo-600",
+    image: "/images/campus-student-ambassadors-duo.jpg",
+    highlightStat: "Peer study circles & academic mentorship across 37+ countries",
   },
   {
     id: 2,
     title: "Career & Employability",
     description: "Equipping students with practical workplace readiness, CV development, personal branding, and real work experience through Growth Beyond Grades.",
     iconName: "Briefcase",
-    accentColor: "from-orange-500 to-amber-600",
+    accentColor: "from-orange-500 to-amber-500",
+    image: "/images/employability-training-logbook-session.jpg",
+    highlightStat: "80+ fellows trained across Cohort 1 & Cohort 2",
   },
   {
     id: 3,
     title: "Leadership & Personal Growth",
-    description: "Fostering leadership capacity, emotional resilience, self-discovery, communication, and proactive problem-solving abilities.",
+    description: "Fostering leadership capacity, emotional resilience, diplomatic speaking, and proactive problem-solving abilities.",
     iconName: "Compass",
     accentColor: "from-emerald-600 to-teal-600",
+    image: "/images/student-leaders-stage-speaking.jpg",
+    highlightStat: "Youth delegates represented at UN, UNESCO & national forums",
   },
   {
     id: 4,
     title: "Digital Skills & Innovation",
-    description: "Promoting digital literacy, AI readiness, emerging technology tools, and responsible innovation for the future of work.",
+    description: "Promoting digital literacy, AI readiness, emerging technology tools, and virtual work simulations for the future of work.",
     iconName: "Cpu",
     accentColor: "from-sky-500 to-blue-600",
+    image: "/images/diplomatic-chamber-delegates.jpg",
+    highlightStat: "3-week virtual work experience powered by ELITE Campus × Kryptr",
   },
   {
     id: 5,
     title: "Mentorship & Networking",
     description: "Connecting students directly with seasoned industry mentors, international fellowship alumni, and collaborative peer circles.",
     iconName: "Users",
-    accentColor: "from-purple-600 to-pink-600",
+    accentColor: "from-indigo-600 to-blue-500",
+    image: "/images/female-leaders-mentorship-meetup.jpg",
+    highlightStat: "1,500+ active members in our mentored WhatsApp hub",
   },
   {
     id: 6,
-    title: "Social Impact & Community Engagement",
-    description: "Inspiring youth to develop grassroots initiatives, champion the UN Sustainable Development Goals (SDGs), and become active changemakers.",
+    title: "Social Impact & SDG Action",
+    description: "Inspiring youth to lead grassroots school drives, champion the UN Sustainable Development Goals (SDGs), and become active changemakers.",
     iconName: "Globe",
-    accentColor: "from-rose-500 to-orange-500",
+    accentColor: "from-emerald-500 to-green-600",
+    image: "/images/grassroots-climate-sdg-school-drive.jpg",
+    highlightStat: "Grassroots SDG 4 Quality Education & SDG 13 Climate outreach",
   },
 ];
 
@@ -102,12 +117,12 @@ export const FLAGSHIP_PROGRAMS: Program[] = [
     badge: "Flagship Initiative",
     partner: "In partnership with The Reboot Wellbeing & Empowerment Foundation",
     description:
-      "A transformative 6-week development experience designed to bridge the gap between academic theory and real-world career readiness. Students undergo reflective growth sessions, career clarity coaching, employability masterclasses, and peer collaboration.",
+      "A transformative 6-week development experience designed to bridge the gap between academic theory and real-world career readiness. Students undergo reflective growth sessions, career clarity coaching, employability masterclasses, and cross-border peer collaboration.",
     impactMetrics: [
-      { label: "Cohort 1 Reach", value: "30 students across 5 countries" },
-      { label: "Cohort 2 Reach", value: "50 students across 12 countries" },
-      { label: "Countries Covered", value: "Nigeria, Cameroon, Kenya, Zimbabwe, Bolivia & more" },
-      { label: "Curriculum Length", value: "6 intensive weeks" },
+      { label: "Cohort 1 Reach", value: "30 students • 5 countries" },
+      { label: "Cohort 2 Reach", value: "50 students • 12 countries" },
+      { label: "Global Footprint", value: "Nigeria, Kenya, Bolivia & more" },
+      { label: "Duration", value: "6 intensive weeks" },
     ],
     highlights: [
       "Mental resilience and wellbeing workshops",
@@ -118,8 +133,9 @@ export const FLAGSHIP_PROGRAMS: Program[] = [
     duration: "6 Weeks (Virtual)",
     status: "Active / Cohort 2",
     actionText: "Learn More & Join Waitlist",
-    actionUrl: "/programs#growth-beyond-grades",
-    image: "/images/IMG-20261030-WA0041.jpg",
+    actionUrl: "/get-involved?tab=volunteer",
+    image: "/images/employability-training-logbook-session.jpg",
+    secondaryImage: "/images/un-women-nile-university-forum.jpg",
   },
   {
     id: "elite-campus-kryptr",
@@ -129,50 +145,52 @@ export const FLAGSHIP_PROGRAMS: Program[] = [
     badge: "Industry Collaboration",
     partner: "Powered by Kryptr",
     description:
-      "Every job asks for experience, yet nobody offers initial experience. ELITE Campus solves this catch-22 with a structured 3-week virtual work experience program allowing students to work on real briefs, build proof-of-work, and unlock paid internships.",
+      "Every job asks for experience, yet nobody offers initial experience. ELITE Campus solves this catch-22 with a structured 3-week virtual work experience program allowing students to work on real company briefs, build proof-of-work, and unlock paid internships.",
     impactMetrics: [
       { label: "Weekly Commitment", value: "Just 3 hours / week" },
       { label: "First Month", value: "100% Free Access" },
-      { label: "Outcome", value: "Portfolio, CV Proof & Paid Internships" },
-      { label: "Format", value: "Fully Remote / Virtual" },
+      { label: "Key Outcome", value: "Portfolio & Paid Internships" },
+      { label: "Delivery Format", value: "100% Remote / Virtual" },
     ],
     highlights: [
       "Work on simulated live briefs from global companies",
-      "Build a portfolio that proves real competence",
+      "Build a verifiable portfolio that proves competence",
       "Fast-track recommendations to hiring startup partners",
-      "Flexible schedule tailored for busy student timetables",
+      "Flexible schedule tailored for busy university timetables",
     ],
     duration: "3 Weeks",
     status: "Open for Applications",
     actionText: "Register on Kryptr (app.kryptr.co)",
     actionUrl: "https://app.kryptr.co",
-    image: "/images/IMG-20261030-WA0043.jpg",
+    image: "/images/diplomatic-chamber-delegates.jpg",
+    secondaryImage: "/images/creative-leadership-student-cohort.jpg",
   },
   {
     id: "webinars",
     slug: "student-development-webinars",
-    title: "Student Development Webinars",
-    subtitle: "Monthly Masterclasses with Global Leaders",
+    title: "Global Summits & Development Webinars",
+    subtitle: "Monthly Masterclasses & Diplomatic Forums with Global Leaders",
     badge: "Monthly Series",
     description:
-      "A recurring monthly learning series featuring industry professionals, scholarship recipients, educators, entrepreneurs, and young changemakers who share actionable strategies on study abroad, fellowship applications, and tech careers.",
+      "A recurring learning series and diplomatic delegation platform featuring scholarship recipients, UN youth delegates, educators, and changemakers who share actionable strategies on study abroad, fellowship applications, and global leadership.",
     impactMetrics: [
       { label: "Cadence", value: "Monthly Sessions" },
-      { label: "Average Attendees", value: "200+ Students" },
-      { label: "Speakers", value: "Global Changemakers" },
-      { label: "Access", value: "Free for Community" },
+      { label: "Avg. Attendance", value: "200+ Students" },
+      { label: "Delegations", value: "UN, UNESCO & World Bank Forums" },
+      { label: "Community Access", value: "100% Free" },
     ],
     highlights: [
       "Live Q&A with scholarship evaluators and fellowship alumni",
+      "Youth representation at UN, UNESCO, and diplomatic summits",
       "Practical workshops on CV, LinkedIn, and personal branding",
-      "Free access to session recordings and presentation decks",
-      "Direct breakout rooms for peer networking",
+      "Direct breakout rooms for international peer networking",
     ],
     duration: "Monthly Masterclasses",
     status: "Monthly Recurring",
-    actionText: "View Upcoming Webinars",
-    actionUrl: "/programs#webinars",
-    image: "/images/IMG-20261030-WA0057.jpg",
+    actionText: "Join Next Session on WhatsApp",
+    actionUrl: "https://chat.whatsapp.com/K9svkTf3bNM2HlwknLpIOH?s=cl&p=a&iam=2",
+    image: "/images/unesco-auditorium-plenary-session.jpg",
+    secondaryImage: "/images/model-un-summit-boardroom.jpg",
   },
 ];
 
@@ -340,30 +358,30 @@ export const OPPORTUNITIES: Opportunity[] = [
 
 export const STUDENT_STORIES = [
   {
-    name: "Chiamaka N.",
-    role: "Growth Beyond Grades Alumni (Cohort 1)",
+    name: "Chiamaka N. & Adaeze O.",
+    role: "Growth Beyond Grades Fellows & Campus Ambassadors",
     country: "Nigeria",
     quote:
-      "TSGH completely shifted my perspective on what it means to prepare for life after university. Through the Growth Beyond Grades initiative, I refined my CV, gained leadership clarity, and secured my first remote internship!",
-    image: "/images/IMG-20261030-WA0057.jpg",
-    badge: "Secured Internship",
+      "TSGH completely shifted our perspective on preparing for life after university. Through the Growth Beyond Grades cohort, we refined our CVs, gained leadership clarity, and secured remote internship placements!",
+    image: "/images/campus-student-ambassadors-duo.jpg",
+    badge: "Cohort 1 Alumni",
   },
   {
-    name: "Emmanuel K.",
-    role: "Youth Changemaker & Model UN Delegate",
-    country: "Kenya",
+    name: "Emmanuel K. & Delegation",
+    role: "Youth Diplomats & Summit Delegates",
+    country: "Kenya & Nigeria",
     quote:
-      "Being part of the TSGH community opened doors I didn't think were possible as an undergraduate. The opportunity hub and mentorship sessions gave me the confidence to apply for international youth summits.",
-    image: "/images/IMG-20261030-WA0052.jpg",
-    badge: "International Delegate",
+      "Being part of the TSGH community opened doors we never thought possible as undergraduates. The mentorship and weekly opportunities gave us the confidence to represent youth voices at international summits.",
+    image: "/images/amnesty-international-youth-delegates.jpg",
+    badge: "Global Summit Delegates",
   },
   {
-    name: "David O. & Sarah A.",
-    role: "SDG Community Leads",
+    name: "David O. & Samuel A.",
+    role: "SDG 4 & Climate Action Advocates",
     country: "Cameroon & Nigeria",
     quote:
-      "We learned how to turn student passion into measurable community action. TSGH connects you with students across 37 countries who are driven to make a difference.",
-    image: "/images/IMG-20261030-WA0049.jpg",
+      "We learned how to turn student passion into measurable community action. TSGH connects you with changemakers across 37+ countries who are actively taking SDG education into local schools.",
+    image: "/images/tsgh-founders-sdg-champions.jpg",
     badge: "SDG Changemakers",
   },
 ];
@@ -373,4 +391,3 @@ export const COMMUNITY_LINKS = {
   linkedin: "https://www.linkedin.com/company/the-student-growth-hub/",
   email: "thestudentgrowthhub@gmail.com",
 };
-

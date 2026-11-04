@@ -146,7 +146,7 @@ export function Chatbot() {
                   key={partIdx}
                   href={url}
                   onClick={() => setIsOpen(false)}
-                  className="text-blue-600 dark:text-blue-400 font-bold underline hover:text-blue-700 inline-flex items-center gap-0.5"
+                  className="text-blue-600 font-bold underline hover:text-blue-700 inline-flex items-center gap-0.5"
                 >
                   {label}
                 </Link>
@@ -158,7 +158,7 @@ export function Chatbot() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-emerald-600 dark:text-emerald-400 font-bold underline hover:text-emerald-700 inline-flex items-center gap-0.5"
+                className="text-emerald-600 font-bold underline hover:text-emerald-700 inline-flex items-center gap-0.5"
               >
                 {label} <ExternalLink className="w-2.5 h-2.5 inline" />
               </a>
@@ -169,7 +169,7 @@ export function Chatbot() {
         // Bold: **text**
         if (part.startsWith("**") && part.endsWith("**")) {
           return (
-            <strong key={partIdx} className="font-extrabold text-slate-900 dark:text-white">
+            <strong key={partIdx} className="font-extrabold text-slate-900">
               {part.slice(2, -2)}
             </strong>
           );
@@ -200,15 +200,15 @@ export function Chatbot() {
       
       {/* Floating Teaser Pill (Unobtrusive) */}
       {!isOpen && showTeaser && (
-        <div className="mb-3 max-w-[280px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-md p-3 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-800 flex items-start gap-2.5 animate-fade-in">
+        <div className="mb-3 max-w-[280px] bg-white/95 backdrop-blur-md p-3 rounded-2xl shadow-xl border border-slate-200 flex items-start gap-2.5 animate-fade-in">
           <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0 text-xs font-bold shadow-xs">
             AI
           </div>
           <div className="min-w-0">
-            <div className="text-xs font-bold text-slate-900 dark:text-white">
+            <div className="text-xs font-bold text-slate-900">
               TSGH Student Advisor
             </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-snug mt-0.5">
+            <p className="text-xs text-slate-600 leading-snug mt-0.5">
               Need help finding scholarships or program info? Ask me!
             </p>
           </div>
@@ -217,7 +217,7 @@ export function Chatbot() {
               e.stopPropagation();
               setShowTeaser(false);
             }}
-            className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-0.5"
+            className="text-slate-400 hover:text-slate-600 p-0.5"
             aria-label="Dismiss teaser"
           >
             <X className="w-3.5 h-3.5" />
@@ -234,7 +234,7 @@ export function Chatbot() {
         >
           <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/40">
             <Image
-              src="/images/logo.jpg"
+              src="/images/tsgh-official-logo.jpg"
               alt="TSGH Logo"
               fill
               sizes="24px"
@@ -243,22 +243,22 @@ export function Chatbot() {
           </div>
           <span className="text-xs sm:text-sm font-bold tracking-tight">Ask TSGH AI</span>
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-300"></span>
           </span>
         </button>
       )}
 
       {/* Responsive Chat Window (Desktop Popover / Mobile Full Sheet) */}
       {isOpen && (
-        <div className="w-[92vw] sm:w-[400px] h-[85vh] sm:h-[560px] max-h-[700px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl border border-slate-200/90 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden animate-fade-in transition-all">
+        <div className="w-[92vw] sm:w-[400px] h-[85vh] sm:h-[560px] max-h-[700px] bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-200/90 shadow-2xl flex flex-col overflow-hidden animate-fade-in transition-all">
           
           {/* Header */}
-          <div className="p-4 bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white flex items-center justify-between shadow-sm">
+          <div className="p-4 bg-gradient-to-r from-blue-700 via-blue-600 to-emerald-600 text-white flex items-center justify-between shadow-sm">
             <div className="flex items-center space-x-2.5">
-              <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-emerald-400 shrink-0">
+              <div className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-white/80 shrink-0">
                 <Image
-                  src="/images/logo.jpg"
+                  src="/images/tsgh-official-logo.jpg"
                   alt="TSGH AI Advisor"
                   fill
                   sizes="36px"
@@ -268,11 +268,11 @@ export function Chatbot() {
               <div>
                 <div className="flex items-center gap-1.5">
                   <h3 className="text-xs sm:text-sm font-black leading-tight">TSGH AI Advisor</h3>
-                  <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-300 font-bold">
+                  <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 text-white font-bold">
                     Gemini AI
                   </span>
                 </div>
-                <p className="text-[10px] text-slate-300">Beyond Grades. Beyond Limitations.</p>
+                <p className="text-[11px] text-blue-100">Beyond Grades. Beyond Limitations.</p>
               </div>
             </div>
 
@@ -280,7 +280,7 @@ export function Chatbot() {
               <button
                 onClick={handleReset}
                 title="Restart chat"
-                className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-blue-100 hover:text-white hover:bg-white/15 transition-colors"
                 aria-label="Restart chat"
               >
                 <RotateCcw className="w-4 h-4" />
@@ -288,7 +288,7 @@ export function Chatbot() {
               <button
                 onClick={() => setIsOpen(false)}
                 title="Close chat"
-                className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-blue-100 hover:text-white hover:bg-white/15 transition-colors"
                 aria-label="Close chat"
               >
                 <ChevronDown className="w-5 h-5 sm:hidden" />
@@ -298,24 +298,24 @@ export function Chatbot() {
           </div>
 
           {/* Messages Feed */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs sm:text-sm">
+          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 text-sm sm:text-base">
             {messages.map((msg) => {
               const isBot = msg.role === "assistant";
               return (
                 <div
                   key={msg.id}
-                  className={`flex items-start gap-2 ${isBot ? "justify-start" : "justify-end"}`}
+                  className={`flex items-start gap-2.5 ${isBot ? "justify-start" : "justify-end"}`}
                 >
                   {isBot && (
-                    <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                      <Bot className="w-3.5 h-3.5" />
+                    <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-2xs">
+                      <Bot className="w-4 h-4" />
                     </div>
                   )}
 
                   <div
-                    className={`p-3 rounded-2xl max-w-[85%] leading-relaxed ${
+                    className={`p-3.5 rounded-2xl max-w-[85%] leading-relaxed ${
                       isBot
-                        ? "bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-xs shadow-2xs"
+                        ? "bg-slate-100 text-slate-800 rounded-tl-xs shadow-2xs font-normal"
                         : "bg-blue-600 text-white rounded-tr-xs shadow-sm font-medium"
                     }`}
                   >
@@ -323,8 +323,8 @@ export function Chatbot() {
                   </div>
 
                   {!isBot && (
-                    <div className="w-6 h-6 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
-                      <User className="w-3.5 h-3.5" />
+                    <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
+                      <User className="w-4 h-4" />
                     </div>
                   )}
                 </div>
@@ -333,15 +333,15 @@ export function Chatbot() {
 
             {/* Loading indicator */}
             {isLoading && (
-              <div className="flex items-start gap-2 animate-fade-in">
-                <div className="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
-                  <Bot className="w-3.5 h-3.5" />
+              <div className="flex items-start gap-2.5 animate-fade-in">
+                <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center shrink-0">
+                  <Bot className="w-4 h-4" />
                 </div>
-                <div className="p-3 bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-xs text-slate-500 flex items-center gap-1.5 text-xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce [animation-delay:0.2s]" />
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-bounce [animation-delay:0.4s]" />
-                  <span className="text-[11px] ml-1">Consulting TSGH Advisor...</span>
+                <div className="p-3.5 bg-slate-100 rounded-2xl rounded-tl-xs text-slate-500 flex items-center gap-2 text-sm">
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-bounce" />
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.2s]" />
+                  <span className="w-2 h-2 rounded-full bg-blue-500 animate-bounce [animation-delay:0.4s]" />
+                  <span className="text-xs ml-1">Consulting TSGH Advisor...</span>
                 </div>
               </div>
             )}
@@ -350,13 +350,13 @@ export function Chatbot() {
           </div>
 
           {/* Quick Prompt Suggestions */}
-          <div className="px-3 py-2 border-t border-slate-200/60 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40">
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none text-[11px]">
+          <div className="px-3.5 py-2.5 border-t border-slate-200/80 bg-slate-50/70">
+            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none text-xs">
               {PROMPT_SUGGESTIONS.map((s, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSend(s)}
-                  className="px-2.5 py-1 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white transition-all shrink-0 font-medium shadow-2xs"
+                  className="px-3 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-blue-600 hover:text-white transition-all shrink-0 font-semibold shadow-2xs min-h-[34px]"
                 >
                   {s}
                 </button>
@@ -365,13 +365,13 @@ export function Chatbot() {
           </div>
 
           {/* Input Bar */}
-          <div className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200/80 dark:border-slate-800">
+          <div className="p-3.5 bg-white border-t border-slate-200/80">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleSend();
               }}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2.5"
             >
               <input
                 type="text"
@@ -379,15 +379,15 @@ export function Chatbot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 disabled={isLoading}
-                className="flex-1 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                className="flex-1 px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
               />
               <button
                 type="submit"
                 disabled={!input.trim() || isLoading}
-                className="p-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 dark:disabled:bg-slate-800 text-white transition-colors shrink-0 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                className="p-3 rounded-2xl bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white transition-colors shrink-0 shadow-xs focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 min-h-[46px] min-w-[46px] flex items-center justify-center"
                 aria-label="Send message"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-5 h-5" />
               </button>
             </form>
           </div>
@@ -397,4 +397,3 @@ export function Chatbot() {
     </div>
   );
 }
-
