@@ -64,6 +64,12 @@ export const metadata: Metadata = {
     siteName: "The Student Growth Hub",
     images: [
       {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "The Student Growth Hub — Beyond Grades. Beyond Limitations.",
+      },
+      {
         url: "/images/tsgh-official-logo.jpg",
         width: 640,
         height: 640,
@@ -78,7 +84,7 @@ export const metadata: Metadata = {
     title: "The Student Growth Hub | Beyond Grades. Beyond Limitations.",
     description:
       "Discover verified scholarships, internships, fellowships, and student development programs across 37+ countries.",
-    images: ["/images/tsgh-official-logo.jpg"],
+    images: ["/og-image.png"],
   },
   other: {
     "founder": "Greatwisdom Nwigwe",

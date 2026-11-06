@@ -46,17 +46,28 @@ Guidelines:
 - Only if a user specifically asks who built, designed, or developed this website/platform, credit **Marvellous Adepoju** (**[Marvel Develops](https://marveldevelops.com)**), a Software Developer and AI Automation Engineer who builds custom software, websites, apps, and AI automations for businesses ([LinkedIn](https://www.linkedin.com/in/marveldevelops)).
 `;
 
+// Google's own 404 message directs new API keys to gemini-3.8-flash; older models are retired for new users.
+const PREFERRED_MODEL = "gemini-3.8-flash";
 const CANDIDATE_MODELS = [
-  "gemini-1.5-flash",
-  "gemini-1.5-flash-latest",
-  "gemini-1.5-flash-8b",
-  "gemini-1.5-pro",
-  "gemini-1.5-pro-latest",
-  "gemini-2.0-flash",
-  "gemini-2.0-flash-exp",
+  PREFERRED_MODEL,
   "gemini-flash-latest",
+  "gemini-flash-lite-latest",
   "gemini-pro-latest",
 ];
+
+/** Orders models: preferred first, then other flash variants, then everything else. */
+function prioritizeModels(dynamicModels: string[]): string[] {
+  return Array.from(
+    new Set([
+      ...CANDIDATE_MODELS.filter((m) => m === PREFERRED_MODEL),
+      ...dynamicModels.filter((m) => m.includes("flash") && !m.includes("preview")),
+      ...dynamicModels.filter((m) => !m.includes("preview")),
+      ...CANDIDATE_MODELS,
+    ])
+  );
+}
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 function getApiKey(): string {
   const rawKey =
@@ -117,15 +128,9 @@ export async function GET() {
   }
 
   // 2. Perform a test ping generation
-  const modelsToTry = [
-    ...availableModels.filter((m) => m === "gemini-1.5-flash"),
-    ...availableModels.filter((m) => m.includes("1.5-flash")),
-    ...availableModels.filter((m) => m.includes("flash")),
-    ...availableModels.filter((m) => m.includes("pro")),
-    ...availableModels,
-    ...CANDIDATE_MODELS,
-  ];
-  const uniqueModels = Array.from(new Set(modelsToTry));
+  const uniqueModels = prioritizeModels(availableModels);
+  diagnosticResult.modelOrderTried = uniqueModels.slice(0, 5);
+  const pingErrors: string[] = [];
 
   for (const model of uniqueModels.slice(0, 5)) {
     try {
@@ -155,8 +160,9 @@ export async function GET() {
           ...diagnosticResult,
         });
       }
-    } catch {
-      // try next
+      pingErrors.push(`${model} (HTTP ${testRes.status}): ${(await testRes.text()).slice(0, 300)}`);
+    } catch (e) {
+      pingErrors.push(`${model}: ${e instanceof Error ? e.message : String(e)}`);
     }
   }
 
@@ -164,7 +170,8 @@ export async function GET() {
     {
       status: "degraded",
       message:
-        "API key was detected, but model calls did not return 200 OK. Inspect modelsListError or modelsListException above.",
+        "API key was detected, but no model returned 200 OK. See pingErrors for Google's exact responses.",
+      pingErrors,
       ...diagnosticResult,
     },
     { status: 200 }
@@ -235,19 +242,12 @@ export async function POST(req: NextRequest) {
         // Fallback to static candidate models if list endpoint cannot be reached
       }
 
-      // Sort models prioritizing gemini-1.5-flash, then other flash models, then pro models, then full list
-      const prioritizedModels = Array.from(
-        new Set([
-          ...dynamicModels.filter((m) => m === "gemini-1.5-flash"),
-          ...dynamicModels.filter((m) => m.includes("1.5-flash")),
-          ...dynamicModels.filter((m) => m.includes("flash")),
-          ...dynamicModels.filter((m) => m.includes("pro")),
-          ...dynamicModels,
-          ...CANDIDATE_MODELS,
-        ])
-      );
+      // Preferred model first (gemini-3.8-flash), then other available flash models, then the rest
+      const prioritizedModels = prioritizeModels(dynamicModels).slice(0, 6);
 
       for (const modelName of prioritizedModels) {
+        // Retry the same model once on 429/503 (temporary demand spikes) before moving on
+        for (let attempt = 0; attempt < 2; attempt++) {
         try {
           const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
 
@@ -282,15 +282,23 @@ export async function POST(req: NextRequest) {
                   geminiData.promptFeedback || geminiData
                 )})`
               );
+              break;
             }
           } else {
             const errorText = await geminiRes.text();
-            modelErrors.push(`${modelName} (HTTP ${geminiRes.status}): ${errorText}`);
+            modelErrors.push(`${modelName} (HTTP ${geminiRes.status}): ${errorText.slice(0, 400)}`);
+            if ((geminiRes.status === 503 || geminiRes.status === 429) && attempt === 0) {
+              await sleep(1200);
+              continue;
+            }
+            break;
           }
         } catch (err) {
           modelErrors.push(
             `${modelName} network exception: ${err instanceof Error ? err.message : String(err)}`
           );
+          break;
+        }
         }
       }
     }

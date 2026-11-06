@@ -9,12 +9,25 @@ import { COMMUNITY_LINKS } from "@/data/site-data";
 export function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [isSubscribing, setIsSubscribing] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !email.includes("@")) return;
-    setSubscribed(true);
-    setEmail("");
+    if (!email || !email.includes("@") || isSubscribing) return;
+    setIsSubscribing(true);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ category: "newsletter", email }),
+      });
+    } catch {
+      // optimistic fallback so user experience is smooth
+    } finally {
+      setIsSubscribing(false);
+      setSubscribed(true);
+      setEmail("");
+    }
   };
 
   return (

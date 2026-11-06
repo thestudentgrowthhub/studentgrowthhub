@@ -11,14 +11,19 @@ import {
   Mail,
   CheckCircle2,
   Send,
+  Loader2,
+  MessageCircle,
 } from "lucide-react";
 import confetti from "canvas-confetti";
+import { COMMUNITY_LINKS } from "@/data/site-data";
 
 type TabType = "volunteer" | "yab" | "partner" | "contact";
 
 export default function GetInvolvedPage() {
   const [activeTab, setActiveTab] = useState<TabType>("volunteer");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -29,17 +34,46 @@ export default function GetInvolvedPage() {
     message: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setErrorMessage("");
+
     try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          category: activeTab,
+          ...formData,
+        }),
       });
-    } catch {
-      // fallback
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Submission failed. Please try again.");
+      }
+
+      setSubmitted(true);
+      try {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 },
+        });
+      } catch {
+        // fallback
+      }
+    } catch (err) {
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : "An error occurred while submitting. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -110,7 +144,7 @@ export default function GetInvolvedPage() {
           {/* Form Card */}
           <div className="rounded-3xl bg-white border border-slate-200/80 p-6 sm:p-12 shadow-sm">
             {submitted ? (
-              <div className="py-12 text-center space-y-5 max-w-md mx-auto animate-fade-in">
+              <div className="py-12 text-center space-y-6 max-w-md mx-auto animate-fade-in">
                 <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-inner">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
@@ -118,12 +152,32 @@ export default function GetInvolvedPage() {
                   Application Received!
                 </h3>
                 <p className="text-base text-slate-600 leading-relaxed font-normal">
-                  Thank you, <strong>{formData.fullName}</strong>. Our student operations team will review your submission and reach out via email or WhatsApp within 2-3 business days.
+                  Thank you, <strong>{formData.fullName}</strong>. Our student operations team has received your application and will reach out via email or WhatsApp within 2-3 business days.
                 </p>
-                <div className="pt-4">
+
+                {/* Instant Community Action */}
+                <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-left space-y-2">
+                  <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">
+                    Next Step While You Wait:
+                  </span>
+                  <p className="text-sm text-emerald-950 font-medium">
+                    Join over 1,500+ active students in our verified WhatsApp community for daily opportunities and announcements.
+                  </p>
+                  <a
+                    href={COMMUNITY_LINKS.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 mt-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold transition-all shadow-xs"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Join WhatsApp Community</span>
+                  </a>
+                </div>
+
+                <div className="pt-2">
                   <button
                     onClick={handleReset}
-                    className="min-h-[48px] px-6 py-3 rounded-2xl text-sm font-bold bg-blue-50 hover:bg-blue-100 text-blue-700 transition-colors"
+                    className="min-h-[48px] px-6 py-3 rounded-2xl text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
                   >
                     Submit Another Inquiry
                   </button>
@@ -243,13 +297,29 @@ export default function GetInvolvedPage() {
                   />
                 </div>
 
+                {errorMessage && (
+                  <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-800 text-sm font-semibold">
+                    {errorMessage}
+                  </div>
+                )}
+
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full sm:w-auto min-h-[52px] inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-base bg-blue-600 hover:bg-blue-700 text-white shadow-md hover:shadow-lg transition-all"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto min-h-[52px] inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-base bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white shadow-md hover:shadow-lg transition-all"
                   >
-                    <span>Submit Application</span>
-                    <Send className="w-5 h-5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Application</span>
+                        <Send className="w-5 h-5" />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>
