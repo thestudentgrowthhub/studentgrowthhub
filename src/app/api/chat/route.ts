@@ -23,9 +23,9 @@ Core Identity:
   6. Social Impact & Community Engagement (SDGs)
 
 Flagship Programs:
-1. Growth Beyond Grades: 6-week intensive cohort in partnership with The Reboot Wellbeing Foundation. Focuses on mental resilience, employability skills, CV formatting, and career clarity. Cohort 1 reached 30 students across 5 countries (Nigeria, Cameroon, Kenya, Zimbabwe, Bolivia). Cohort 2 is active with 50 students across 12 countries.
+1. Growth Beyond Grades: 6-week intensive cohort in partnership with The Reboot Wellbeing and Empowerment Foundation. Focuses on mental resilience, employability skills, CV formatting, and career clarity. Cohort 1 reached 30 students across 5 countries (Nigeria, Cameroon, Kenya, Zimbabwe, Bolivia). Cohort 2 is active with 50 students across 12 countries.
 2. ELITE Campus × Kryptr: 3-week virtual work experience program (3 hrs/week). Build portfolio, CV proof-of-work, and access paid internships. 100% Free for the 1st month. Direct link: https://app.kryptr.co
-3. Student Development Webinars: Monthly masterclasses with global leaders and scholarship evaluators.
+3. Student Development Webinars: Monthly learning series featuring professionals, educators, entrepreneurs, and young changemakers.
 
 Community Links:
 - WhatsApp Community (1,500+ members): ${COMMUNITY_LINKS.whatsapp}
@@ -40,9 +40,15 @@ ${OPPORTUNITIES.map(
 
 Guidelines:
 - Keep responses friendly, encouraging, actionable, and concise (2-4 short paragraphs or bullet points).
-- Whenever mentioning scholarships, programs, or volunteering, mention the relevant site page or link.
-- Emphasize that all opportunities on The Student Growth Hub are 100% verified and free to discover.
+- Answer any academic, career, scholarship, CV, or leadership question the student asks thoughtfully and directly.
+- Whenever mentioning scholarships, programs, or volunteering on our platform, include markdown links like [Opportunities Hub](/opportunities) or [Programs Page](/programs).
 `;
+
+const GEMINI_MODELS = [
+  "gemini-2.5-flash",
+  "gemini-2.0-flash",
+  "gemini-flash-latest",
+];
 
 export async function POST(req: NextRequest) {
   try {
@@ -54,60 +60,119 @@ export async function POST(req: NextRequest) {
     }
 
     const latestUserMessage = messages[messages.length - 1].content.trim();
-    const apiKey = process.env.GEMINI_API_KEY;
+    const rawKey =
+      process.env.GEMINI_API_KEY ||
+      process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
+      process.env.GOOGLE_API_KEY ||
+      "";
+    const apiKey = rawKey.trim().replace(/^["']|["']$/g, "");
 
-    // Dual-Mode 1: Live Google Gemini API Call if GEMINI_API_KEY is configured
-    if (apiKey && apiKey !== "your_gemini_api_key_here") {
-      try {
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const apiKeyDetected = Boolean(apiKey && apiKey !== "your_gemini_api_key_here");
+    const modelErrors: string[] = [];
 
-        // Format conversation history for Gemini API
-        const contents = [
-          {
-            role: "user",
-            parts: [{ text: `SYSTEM INSTRUCTIONS:\n${AI_SYSTEM_PROMPT}\n\nPlease acknowledge and assist the student.` }],
-          },
-          {
-            role: "model",
-            parts: [{ text: "Understood. I am the AI Advisor for The Student Growth Hub, ready to help students discover opportunities, programs, and community networks." }],
-          },
-          ...messages.slice(-6).map((m) => ({
-            role: m.role === "assistant" ? "model" : "user",
-            parts: [{ text: m.content }],
-          })),
-        ];
+    if (apiKeyDetected) {
+      // Build strictly alternating user/model conversation history starting with a 'user' turn
+      const normalizedTurns: { role: "user" | "model"; parts: { text: string }[] }[] = [];
 
-        const geminiRes = await fetch(geminiUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents,
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: 600,
-            },
-          }),
-        });
+      for (const m of messages.slice(-8)) {
+        const mappedRole: "user" | "model" = m.role === "user" ? "user" : "model";
+        const text = (m.content || "").trim();
+        if (!text) continue;
 
-        if (geminiRes.ok) {
-          const geminiData = await geminiRes.json();
-          const reply = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (reply) {
-            return NextResponse.json({ reply, source: "gemini" });
-          }
+        // Gemini requires the first turn in `contents` to be role: "user"
+        if (normalizedTurns.length === 0 && mappedRole === "model") {
+          continue;
         }
-      } catch (err) {
-        console.warn("Gemini API call failed, falling back to local knowledge base:", err);
+
+        const prevTurn = normalizedTurns[normalizedTurns.length - 1];
+        if (prevTurn && prevTurn.role === mappedRole) {
+          prevTurn.parts[0].text += `\n\n${text}`;
+        } else {
+          normalizedTurns.push({
+            role: mappedRole,
+            parts: [{ text }],
+          });
+        }
+      }
+
+      if (normalizedTurns.length === 0) {
+        normalizedTurns.push({
+          role: "user",
+          parts: [{ text: latestUserMessage }],
+        });
+      }
+
+      for (const modelName of GEMINI_MODELS) {
+        try {
+          const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+
+          const geminiRes = await fetch(geminiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              systemInstruction: {
+                parts: [{ text: AI_SYSTEM_PROMPT }],
+              },
+              contents: normalizedTurns,
+              generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 700,
+              },
+            }),
+          });
+
+          if (geminiRes.ok) {
+            const geminiData = await geminiRes.json();
+            const reply = geminiData.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (reply) {
+              return NextResponse.json({
+                reply,
+                source: "gemini",
+                model: modelName,
+                apiKeyDetected: true,
+              });
+            } else {
+              modelErrors.push(
+                `${modelName}: Empty candidate response (${JSON.stringify(
+                  geminiData.promptFeedback || geminiData
+                )})`
+              );
+            }
+          } else {
+            const errorText = await geminiRes.text();
+            modelErrors.push(`${modelName} (HTTP ${geminiRes.status}): ${errorText}`);
+          }
+        } catch (err) {
+          modelErrors.push(
+            `${modelName} network exception: ${err instanceof Error ? err.message : String(err)}`
+          );
+        }
       }
     }
 
-    // Dual-Mode 2: High-Quality Built-in Knowledge Base Fallback
+    // Fallback to built-in knowledge base if API key is missing or all models returned errors
+    const debugReason = !apiKeyDetected
+      ? "GEMINI_API_KEY is not set in environment variables (.env.local or Vercel Settings -> Environment Variables). Note: On Vercel, after adding an environment variable, you must trigger a Redeploy for it to take effect."
+      : `Gemini API call failed across models: ${modelErrors.join(" | ")}`;
+
+    console.warn("[AI Route Fallback]:", debugReason);
+
     const fallbackReply = generateFallbackReply(latestUserMessage);
-    return NextResponse.json({ reply: fallbackReply, source: "local_knowledge_base" });
+    return NextResponse.json({
+      reply: fallbackReply,
+      source: "local_knowledge_base",
+      apiKeyDetected,
+      debugError: debugReason,
+    });
   } catch (error) {
     console.error("Chatbot Route Error:", error);
     return NextResponse.json(
-      { reply: "Sorry, I encountered a brief issue. You can browse our Opportunities Hub directly or join our active WhatsApp community!" },
+      {
+        reply:
+          "Sorry, I encountered a brief issue. You can browse our Opportunities Hub directly or join our active WhatsApp community!",
+        source: "error_handler",
+        debugError: error instanceof Error ? error.message : String(error),
+      },
       { status: 200 }
     );
   }
@@ -121,6 +186,7 @@ function generateFallbackReply(query: string): string {
       "🎓 **Verified Scholarships:**\n\n" +
       "We curate fully funded international scholarships for ambitious students! Top open opportunities include:\n" +
       "• **Chevening UK Government Master's Scholarship** (Fully Funded UK tuition + monthly stipend)\n" +
+      "• **Mastercard Foundation Scholars Program** (Full tuition, accommodation & stipend)\n" +
       "• **Generation Google Scholarship EMEA** (€7,000 for Computer Science & Tech students)\n\n" +
       "You can filter by region and education level right on our [Opportunities Hub](/opportunities)!"
     );
@@ -131,10 +197,10 @@ function generateFallbackReply(query: string): string {
       "🌱 **About Growth Beyond Grades:**\n\n" +
       "Growth Beyond Grades is our flagship 6-week employability and mental resilience program in partnership with **The Reboot Wellbeing & Empowerment Foundation**.\n\n" +
       "• **Cohort 1:** 30 students across 5 countries (Nigeria, Cameroon, Kenya, Zimbabwe, Bolivia).\n" +
-      "• **Cohort 2:** 50 students across 12 countries currently active.\n\n" +
-      "To join the waitlist for Cohort 3, check our [Programs Page](/programs) or join our [WhatsApp Community](" +
+      "• **Cohort 2:** 50 students across 12 countries currently ongoing.\n\n" +
+      "Check our [Programs Page](/programs) or join our [WhatsApp Community](" +
       COMMUNITY_LINKS.whatsapp +
-      ") for instant application notifications!"
+      ") for upcoming cohort updates!"
     );
   }
 
@@ -143,43 +209,41 @@ function generateFallbackReply(query: string): string {
       "💼 **ELITE Campus × Kryptr Virtual Work Experience:**\n\n" +
       "Struggling with the 'need experience to get experience' loop? ELITE Campus is a 3-week virtual work experience program:\n" +
       "• Only **3 hours / week** required\n" +
-      "• Work on simulated briefs to build verifiable portfolio proof\n" +
-      "• Access to paid startup internships\n" +
-      "• **100% Free** for your first month\n\n" +
+      "• Build your portfolio & CV with real work experience\n" +
+      "• Access to paid internship opportunities\n" +
+      "• **FREE for the 1st month**\n\n" +
       "Register directly at **[app.kryptr.co](https://app.kryptr.co)** or view our [Programs Page](/programs)."
     );
   }
 
   if (q.includes("volunteer") || q.includes("yab") || q.includes("youth advisory") || q.includes("join team")) {
     return (
-      "🤝 **Join The Student Growth Hub Team:**\n\n" +
-      "We welcome passionate students as moderators, content creators, and Youth Advisory Board (YAB) members across 37+ countries.\n\n" +
-      "Head to our [Get Involved Portal](/get-involved) to submit your intake form. Our coordination team reviews applications weekly!"
+      "🤝 **Get Involved with The Student Growth Hub:**\n\n" +
+      "We welcome passionate students as volunteers and Youth Advisory Board (YAB) applicants across 37+ countries.\n\n" +
+      "Head to our [Get Involved Page](/get-involved) to submit your application!"
     );
   }
 
   if (q.includes("whatsapp") || q.includes("community") || q.includes("group") || q.includes("linkedin")) {
     return (
       "💬 **Connect with 1,500+ Students:**\n\n" +
-      "Your growth journey shouldn't happen alone! Connect with ambitious peers, mentors, and alumni:\n" +
-      "• **WhatsApp Community:** [Join 1,500+ Hub](" +
+      "Your growth journey shouldn't happen alone! Connect with peers and mentors:\n" +
+      "• **WhatsApp Community:** [Join 1,500+ Members](" +
       COMMUNITY_LINKS.whatsapp +
       ")\n" +
       "• **LinkedIn Page:** [Follow 19K+ on LinkedIn](" +
       COMMUNITY_LINKS.linkedin +
-      ")\n\n" +
-      "We share daily opportunities, webinar links, and peer accountability!"
+      ")"
     );
   }
 
-  // General helpful response
   return (
     "👋 Hello! Welcome to **The Student Growth Hub** — *Beyond Grades. Beyond Limitations.*\n\n" +
     "I'm your **AI Advisor**, and I can help you with:\n" +
     "1. 🎓 Discovering verified scholarships, internships, and fellowships on our [Opportunities Hub](/opportunities)\n" +
     "2. 🌱 Learning about our **Growth Beyond Grades** cohort training on our [Programs Page](/programs)\n" +
     "3. 💼 Gaining virtual work experience through **ELITE Campus × Kryptr**\n" +
-    "4. 🤝 Submitting a volunteer or Youth Advisory Board application on our [Get Involved Portal](/get-involved)\n\n" +
+    "4. 🤝 Applying to volunteer or join the Youth Advisory Board on our [Get Involved Page](/get-involved)\n\n" +
     "What area of your student journey would you like to explore?"
   );
 }

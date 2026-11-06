@@ -93,17 +93,40 @@ export function Chatbot() {
         }),
       });
 
-      if (!res.ok) throw new Error("Network error");
+      if (!res.ok) {
+        console.error("[AI Chatbot Error]: /api/chat returned HTTP status", res.status);
+        throw new Error(`HTTP ${res.status}`);
+      }
+
       const data = await res.json();
+
+      // Detailed browser console logging so you can inspect the exact AI status in DevTools (F12 -> Console)
+      if (data.source === "gemini") {
+        console.info(
+          `✅ [AI Chatbot]: Live Gemini response received (model: ${data.model})`
+        );
+      } else {
+        console.warn(
+          "⚠️ [AI Chatbot]: Using local fallback knowledge base instead of live Gemini API.",
+          {
+            source: data.source,
+            apiKeyDetectedOnServer: data.apiKeyDetected,
+            reason: data.debugError,
+          }
+        );
+      }
 
       const botReply: Message = {
         id: `bot-${Date.now()}`,
         role: "assistant",
-        content: data.reply || "I'm here to help! Explore our Opportunities Hub or connect on WhatsApp.",
+        content:
+          data.reply ||
+          "I'm here to help! Explore our Opportunities Hub or connect on WhatsApp.",
       };
 
       setMessages((prev) => [...prev, botReply]);
-    } catch {
+    } catch (err) {
+      console.error("❌ [AI Chatbot Network Error]:", err);
       setMessages((prev) => [
         ...prev,
         {
@@ -126,15 +149,13 @@ export function Chatbot() {
   const renderFormattedText = (text: string) => {
     const lines = text.split("\n");
     return lines.map((line, lineIdx) => {
-      // Check for bullet line
-      const isBullet = line.startsWith("• ") || line.startsWith("- ") || line.startsWith("* ");
+      const isBullet =
+        line.startsWith("• ") || line.startsWith("- ") || line.startsWith("* ");
       const cleanLine = isBullet ? line.replace(/^[•\-*]\s+/, "") : line;
 
-      // Parse bold **text** and links [text](url)
       const parts = cleanLine.split(/(\[.*?\]\(.*?\)|\*\*.*?\*\*)/g);
 
       const content = parts.map((part, partIdx) => {
-        // Link: [label](url)
         if (part.startsWith("[") && part.includes("](") && part.endsWith(")")) {
           const match = part.match(/\[(.*?)\]\((.*?)\)/);
           if (match) {
@@ -166,7 +187,6 @@ export function Chatbot() {
           }
         }
 
-        // Bold: **text**
         if (part.startsWith("**") && part.endsWith("**")) {
           return (
             <strong key={partIdx} className="font-extrabold text-slate-900">
@@ -249,7 +269,7 @@ export function Chatbot() {
         </button>
       )}
 
-      {/* Responsive Chat Window (Desktop Popover / Mobile Full Sheet) */}
+      {/* Responsive Chat Window */}
       {isOpen && (
         <div className="w-[92vw] sm:w-[400px] h-[85vh] sm:h-[560px] max-h-[700px] bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-200/90 shadow-2xl flex flex-col overflow-hidden animate-fade-in transition-all">
           
