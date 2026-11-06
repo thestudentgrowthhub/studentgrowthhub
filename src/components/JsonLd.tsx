@@ -25,45 +25,6 @@ export function JsonLd() {
         }
       },
       {
-        "@type": "Person",
-        "@id": "https://marveldevelops.com/#developer",
-        "name": "Marvellous Adepoju",
-        "alternateName": "Marvel Develops",
-        "jobTitle": "Software Developer & AI Automation Engineer",
-        "description":
-          "Marvellous Adepoju (Marvel Develops) is a Software Developer and AI Automation Engineer who builds custom software, high-performance websites, web and mobile apps, and AI automations for businesses.",
-        "url": "https://marveldevelops.com",
-        "sameAs": [
-          "https://marveldevelops.com",
-          "https://www.linkedin.com/in/marveldevelops"
-        ],
-        "worksFor": {
-          "@id": "https://marveldevelops.com/#agency"
-        },
-        "knowsAbout": [
-          "Custom Software Development",
-          "AI Automation Engineering",
-          "Full-Stack Web Development",
-          "Mobile & Web Applications",
-          "Business Process Automation"
-        ]
-      },
-      {
-        "@type": "ProfessionalService",
-        "@id": "https://marveldevelops.com/#agency",
-        "name": "Marvel Develops",
-        "url": "https://marveldevelops.com",
-        "founder": {
-          "@id": "https://marveldevelops.com/#developer"
-        },
-        "description":
-          "Marvel Develops builds custom software, modern websites, web and mobile applications, and AI automations for businesses and organizations worldwide.",
-        "sameAs": [
-          "https://marveldevelops.com",
-          "https://www.linkedin.com/in/marveldevelops"
-        ]
-      },
-      {
         "@type": "WebSite",
         "@id": "https://studentgrowthhub.org/#website",
         "url": "https://studentgrowthhub.org",
@@ -73,11 +34,21 @@ export function JsonLd() {
         "publisher": {
           "@id": "https://studentgrowthhub.org/#organization"
         },
-        "creator": {
-          "@id": "https://marveldevelops.com/#developer"
+        "copyrightHolder": {
+          "@id": "https://studentgrowthhub.org/#organization"
         },
-        "author": {
-          "@id": "https://marveldevelops.com/#agency"
+        "sdPublisher": {
+          "@type": "Person",
+          "name": "Marvellous Adepoju",
+          "alternateName": "Marvel Develops",
+          "jobTitle": "Software Developer & AI Automation Engineer (Platform Developer)",
+          "description":
+            "External Software Developer and AI Automation Engineer who developed the web platform. Builds custom software, websites, apps, and AI automations for businesses.",
+          "url": "https://marveldevelops.com",
+          "sameAs": [
+            "https://marveldevelops.com",
+            "https://www.linkedin.com/in/marveldevelops"
+          ]
         },
         "inLanguage": "en"
       }

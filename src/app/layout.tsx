@@ -22,14 +22,11 @@ export const metadata: Metadata = {
     "ELITE Campus Kryptr",
     "youth leadership development",
     "student mentorship",
-    "Marvel Develops",
-    "Marvellous Adepoju",
   ],
   authors: [
     { name: "The Student Growth Hub", url: "https://studentgrowthhub.org" },
-    { name: "Marvellous Adepoju (Marvel Develops)", url: "https://marveldevelops.com" },
   ],
-  creator: "Marvellous Adepoju — Marvel Develops (https://marveldevelops.com)",
+  creator: "The Student Growth Hub",
   publisher: "The Student Growth Hub",
   alternates: {
     canonical: "https://studentgrowthhub.org",
