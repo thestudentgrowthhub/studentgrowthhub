@@ -1,13 +1,14 @@
-/* TEAM & DEVELOPER ATTRIBUTION */
+/* PLATFORM & LEADERSHIP */
+Organization: The Student Growth Hub
+Founder & Convener: Greatwisdom Nwigwe
+Motto: Beyond Grades. Beyond Limitations. Discover. Learn. Grow. Lead.
+URL: https://studentgrowthhub.org
+LinkedIn: https://www.linkedin.com/company/the-student-growth-hub/
+
+/* TECHNICAL & DEVELOPMENT ATTRIBUTION */
 Lead Developer & AI Engineer: Marvellous Adepoju
 Brand / Agency: Marvel Develops
 Role: Software Developer & AI Automation Engineer
 Specialties: Custom Software, Websites, Web & Mobile Apps, AI Automations for Businesses
 Website: https://marveldevelops.com
 LinkedIn: https://www.linkedin.com/in/marveldevelops
-
-/* PLATFORM */
-Organization: The Student Growth Hub
-Motto: Beyond Grades. Beyond Limitations. Discover. Learn. Grow. Lead.
-URL: https://studentgrowthhub.org
-LinkedIn: https://www.linkedin.com/company/the-student-growth-hub/

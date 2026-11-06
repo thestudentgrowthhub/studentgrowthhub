@@ -31,7 +31,7 @@ export default function HomePage() {
                 <div className="relative aspect-[4/3] w-full rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200/80">
                   <Image
                     src="/images/tsgh-founders-sdg-champions.jpg"
-                    alt="The Student Growth Hub — Beyond Grades. Beyond Limitations."
+                    alt="The Student Growth Hub Founder Greatwisdom Nwigwe & Student Changemakers"
                     fill
                     sizes="(max-width: 1024px) 100vw, 600px"
                     className="object-cover"
@@ -39,7 +39,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/75 via-transparent to-transparent" />
                   <div className="absolute bottom-5 left-5 right-5 text-white">
                     <span className="text-xs font-bold uppercase tracking-wider bg-emerald-600 px-3 py-1 rounded-full inline-block mb-1.5">
-                      Discover • Learn • Grow • Lead
+                      Founded by Greatwisdom Nwigwe
                     </span>
                     <p className="text-base sm:text-lg font-bold leading-snug">
                       Equipping students to excel academically and thrive beyond their grades.
@@ -60,7 +60,7 @@ export default function HomePage() {
                 </h2>
 
                 <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
-                  The Student Growth Hub is a youth-led student development platform established to help students grow beyond the classroom. We believe that academic excellence, while important, is only one part of a student&apos;s development. Students also need access to opportunities, practical skills, mentorship, leadership experiences, supportive networks, and the right resources to prepare for life beyond school.
+                  The Student Growth Hub is a youth-led student development platform established by Greatwisdom Nwigwe to help students grow beyond the classroom. We believe that academic excellence, while important, is only one part of a student&apos;s development. Students also need access to opportunities, practical skills, mentorship, leadership experiences, supportive networks, and the right resources to prepare for life beyond school.
                 </p>
 
                 <p className="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">

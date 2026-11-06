@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description:
     "A youth-led global student development platform empowering students across 37+ countries with scholarships, internships, fellowships, employability skills, mentorship, and supportive networks.",
   keywords: [
+    "Greatwisdom Nwigwe",
+    "Greatwisdom Nwigwe Student Growth Hub",
     "The Student Growth Hub",
     "student growth hub",
     "scholarships for students",
@@ -24,9 +26,10 @@ export const metadata: Metadata = {
     "student mentorship",
   ],
   authors: [
+    { name: "Greatwisdom Nwigwe (Founder)", url: "https://studentgrowthhub.org" },
     { name: "The Student Growth Hub", url: "https://studentgrowthhub.org" },
   ],
-  creator: "The Student Growth Hub",
+  creator: "Greatwisdom Nwigwe",
   publisher: "The Student Growth Hub",
   alternates: {
     canonical: "https://studentgrowthhub.org",
@@ -71,6 +74,7 @@ export const metadata: Metadata = {
     images: ["/images/tsgh-official-logo.jpg"],
   },
   other: {
+    "founder": "Greatwisdom Nwigwe",
     "web_author": "Marvellous Adepoju | Marvel Develops (https://marveldevelops.com)",
     "developer": "Marvellous Adepoju — Software Developer & AI Automation Engineer",
     "developer:brand": "Marvel Develops",

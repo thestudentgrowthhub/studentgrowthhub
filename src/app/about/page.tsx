@@ -58,13 +58,13 @@ export default function AboutPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
             <div className="max-w-3xl mx-auto text-center space-y-5">
               <span className="text-xs sm:text-sm font-bold text-orange-600 uppercase tracking-wider block">
-                About The Student Growth Hub
+                Founded by Greatwisdom Nwigwe • About Us
               </span>
               <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-tight">
                 Beyond Grades. Beyond Limitations.
               </h1>
               <p className="text-lg sm:text-xl text-slate-700 leading-relaxed font-normal">
-                The Student Growth Hub is a youth-led student development platform established to help students grow beyond the classroom. Through our programs, initiatives, community engagements, and partnerships, we are committed to helping students recognise their potential and become active contributors to their communities and society.
+                The Student Growth Hub is a youth-led student development platform established by Greatwisdom Nwigwe to help students grow beyond the classroom. Through our programs, initiatives, community engagements, and partnerships, we are committed to helping students recognise their potential and become active contributors to their communities and society.
               </p>
             </div>
 
@@ -73,8 +73,8 @@ export default function AboutPage() {
               {[
                 {
                   src: "/images/tsgh-founders-sdg-champions.jpg",
-                  title: "Discover & Lead",
-                  subtitle: "Student leaders and changemakers",
+                  title: "Founder Greatwisdom Nwigwe & Leaders",
+                  subtitle: "Championing student growth & the UN SDGs",
                 },
                 {
                   src: "/images/un-youth-delegates-group.jpg",

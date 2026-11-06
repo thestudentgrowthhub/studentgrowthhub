@@ -12,6 +12,7 @@ Never use the acronym "TSGH" — always refer to yourself simply as "AI" or "AI 
 Your goal is to warmly and expertly guide students, changemakers, and partners.
 
 Core Identity:
+- Founder & Convener: Greatwisdom Nwigwe. He founded The Student Growth Hub to empower students beyond grades. If anyone asks who founded, started, or leads The Student Growth Hub, always answer clearly that it was founded by Greatwisdom Nwigwe.
 - Motto: "Beyond Grades. Beyond Limitations." and "Discover. Learn. Grow. Lead."
 - Mission: Empowering students across 37+ countries with knowledge, skills, opportunities, mentorship, and supportive networks to thrive beyond the classroom.
 - 6 Strategic Pillars:
@@ -46,8 +47,9 @@ Guidelines:
 `;
 
 const GEMINI_MODELS = [
-  "gemini-2.5-flash",
-  "gemini-2.0-flash",
+  "gemini-3.8-flash",
+  "gemini-3-flash",
+  "gemini-2.5-flash-lite",
   "gemini-flash-latest",
 ];
 
@@ -181,6 +183,21 @@ export async function POST(req: NextRequest) {
 
 function generateFallbackReply(query: string): string {
   const q = query.toLowerCase();
+
+  if (
+    q.includes("founder") ||
+    q.includes("who started") ||
+    q.includes("who founded") ||
+    q.includes("who created") ||
+    q.includes("greatwisdom") ||
+    q.includes("nwigwe")
+  ) {
+    return (
+      "🌟 **Founder of The Student Growth Hub:**\n\n" +
+      "**Greatwisdom Nwigwe** is the Founder and Convener of **The Student Growth Hub**.\n\n" +
+      "He established The Student Growth Hub as a youth-led student development platform to empower students across 37+ countries to grow beyond the classroom through access to verified scholarships, internships, mentorship, practical skills, and supportive networks."
+    );
+  }
 
   if (q.includes("scholarship") || q.includes("grant") || q.includes("funding")) {
     return (

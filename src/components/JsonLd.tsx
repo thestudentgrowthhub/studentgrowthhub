@@ -11,6 +11,13 @@ export function JsonLd() {
           "@type": "ImageObject",
           "url": "https://studentgrowthhub.org/images/tsgh-official-logo.jpg"
         },
+        "founder": {
+          "@type": "Person",
+          "@id": "https://studentgrowthhub.org/#founder",
+          "name": "Greatwisdom Nwigwe",
+          "jobTitle": "Founder & Convener",
+          "description": "Founder and Convener of The Student Growth Hub."
+        },
         "description":
           "A youth-led student development platform established to help students grow beyond the classroom through access to scholarships, internships, practical skills, mentorship, and supportive networks across 37+ countries.",
         "slogan": "Beyond Grades. Beyond Limitations. Discover. Learn. Grow. Lead.",
@@ -25,6 +32,17 @@ export function JsonLd() {
         }
       },
       {
+        "@type": "Person",
+        "@id": "https://studentgrowthhub.org/#founder",
+        "name": "Greatwisdom Nwigwe",
+        "jobTitle": "Founder & Convener",
+        "worksFor": {
+          "@id": "https://studentgrowthhub.org/#organization"
+        },
+        "description":
+          "Greatwisdom Nwigwe is the Founder and Convener of The Student Growth Hub, empowering students across 37+ countries with access to scholarships, internships, skills, and mentorship."
+      },
+      {
         "@type": "WebSite",
         "@id": "https://studentgrowthhub.org/#website",
         "url": "https://studentgrowthhub.org",
@@ -36,6 +54,9 @@ export function JsonLd() {
         },
         "copyrightHolder": {
           "@id": "https://studentgrowthhub.org/#organization"
+        },
+        "creator": {
+          "@id": "https://studentgrowthhub.org/#founder"
         },
         "sdPublisher": {
           "@type": "Person",
