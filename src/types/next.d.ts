@@ -1,6 +1,6 @@
-import React from "react";
-
 declare module "next/link" {
+  import type React from "react";
+
   export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
     href: string | { pathname?: string; query?: Record<string, string | number | boolean> };
     as?: string;
@@ -14,9 +14,4 @@ declare module "next/link" {
 
   const Link: React.ForwardRefExoticComponent<LinkProps & React.RefAttributes<HTMLAnchorElement>>;
   export default Link;
-}
-
-declare module "*.css" {
-  const content: { [className: string]: string };
-  export default content;
 }
