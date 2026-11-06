@@ -46,8 +46,15 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/images/tsgh-official-logo.jpg",
-    apple: "/images/tsgh-official-logo.jpg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+      { url: "/images/tsgh-official-logo.jpg", type: "image/jpeg" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
   },
   openGraph: {
     title: "The Student Growth Hub | Beyond Grades. Beyond Limitations.",

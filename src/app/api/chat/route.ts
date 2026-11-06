@@ -46,12 +46,130 @@ Guidelines:
 - Only if a user specifically asks who built, designed, or developed this website/platform, credit **Marvellous Adepoju** (**[Marvel Develops](https://marveldevelops.com)**), a Software Developer and AI Automation Engineer who builds custom software, websites, apps, and AI automations for businesses ([LinkedIn](https://www.linkedin.com/in/marveldevelops)).
 `;
 
-const GEMINI_MODELS = [
-  "gemini-3.8-flash",
-  "gemini-3-flash",
-  "gemini-2.5-flash-lite",
+const CANDIDATE_MODELS = [
+  "gemini-1.5-flash",
+  "gemini-1.5-flash-latest",
+  "gemini-1.5-flash-8b",
+  "gemini-1.5-pro",
+  "gemini-1.5-pro-latest",
+  "gemini-2.0-flash",
+  "gemini-2.0-flash-exp",
   "gemini-flash-latest",
+  "gemini-pro-latest",
 ];
+
+function getApiKey(): string {
+  const rawKey =
+    process.env.GEMINI_API_KEY ||
+    process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
+    process.env.GOOGLE_API_KEY ||
+    "";
+  return rawKey.trim().replace(/^["']|["']$/g, "");
+}
+
+/**
+ * Diagnostic GET endpoint: Visit /api/chat directly in browser
+ * to instantly see if the Gemini API key is detected, list supported models,
+ * and test a live ping response from Google.
+ */
+export async function GET() {
+  const apiKey = getApiKey();
+  if (!apiKey || apiKey === "your_gemini_api_key_here") {
+    return NextResponse.json(
+      {
+        status: "error",
+        apiKeyConfigured: false,
+        message:
+          "GEMINI_API_KEY is not configured on the server. Add GEMINI_API_KEY in Vercel Settings -> Environment Variables, then Redeploy.",
+      },
+      { status: 200 }
+    );
+  }
+
+  const maskedKey = `${apiKey.slice(0, 4)}...${apiKey.slice(-4)}`;
+  const diagnosticResult: Record<string, unknown> = {
+    apiKeyConfigured: true,
+    maskedKey,
+    keyLength: apiKey.length,
+  };
+
+  // 1. Fetch available models from Google for this API key
+  let availableModels: string[] = [];
+  try {
+    const listRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`
+    );
+    if (listRes.ok) {
+      const listData = await listRes.json();
+      availableModels = (listData.models || [])
+        .filter((m: { supportedGenerationMethods?: string[] }) =>
+          m.supportedGenerationMethods?.includes("generateContent")
+        )
+        .map((m: { name: string }) => m.name.replace(/^models\//, ""));
+      diagnosticResult.availableModelsCount = availableModels.length;
+      diagnosticResult.sampleModels = availableModels.slice(0, 10);
+    } else {
+      const errText = await listRes.text();
+      diagnosticResult.modelsListError = `HTTP ${listRes.status}: ${errText}`;
+    }
+  } catch (e) {
+    diagnosticResult.modelsListException = e instanceof Error ? e.message : String(e);
+  }
+
+  // 2. Perform a test ping generation
+  const modelsToTry = [
+    ...availableModels.filter((m) => m === "gemini-1.5-flash"),
+    ...availableModels.filter((m) => m.includes("1.5-flash")),
+    ...availableModels.filter((m) => m.includes("flash")),
+    ...availableModels.filter((m) => m.includes("pro")),
+    ...availableModels,
+    ...CANDIDATE_MODELS,
+  ];
+  const uniqueModels = Array.from(new Set(modelsToTry));
+
+  for (const model of uniqueModels.slice(0, 5)) {
+    try {
+      const testRes = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: "Hello! Reply with exactly: 'Gemini is live!'" }],
+              },
+            ],
+          }),
+        }
+      );
+      if (testRes.ok) {
+        const testData = await testRes.json();
+        const testReply = testData.candidates?.[0]?.content?.parts?.[0]?.text;
+        return NextResponse.json({
+          status: "ok",
+          message: "Gemini API is working perfectly!",
+          workingModel: model,
+          liveReply: testReply,
+          ...diagnosticResult,
+        });
+      }
+    } catch {
+      // try next
+    }
+  }
+
+  return NextResponse.json(
+    {
+      status: "degraded",
+      message:
+        "API key was detected, but model calls did not return 200 OK. Inspect modelsListError or modelsListException above.",
+      ...diagnosticResult,
+    },
+    { status: 200 }
+  );
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -63,13 +181,7 @@ export async function POST(req: NextRequest) {
     }
 
     const latestUserMessage = messages[messages.length - 1].content.trim();
-    const rawKey =
-      process.env.GEMINI_API_KEY ||
-      process.env.NEXT_PUBLIC_GEMINI_API_KEY ||
-      process.env.GOOGLE_API_KEY ||
-      "";
-    const apiKey = rawKey.trim().replace(/^["']|["']$/g, "");
-
+    const apiKey = getApiKey();
     const apiKeyDetected = Boolean(apiKey && apiKey !== "your_gemini_api_key_here");
     const modelErrors: string[] = [];
 
@@ -105,7 +217,37 @@ export async function POST(req: NextRequest) {
         });
       }
 
-      for (const modelName of GEMINI_MODELS) {
+      // Step 1: Discover supported models dynamically from Google for this exact API key
+      let dynamicModels: string[] = [];
+      try {
+        const listRes = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`
+        );
+        if (listRes.ok) {
+          const listData = await listRes.json();
+          dynamicModels = (listData.models || [])
+            .filter((m: { supportedGenerationMethods?: string[] }) =>
+              m.supportedGenerationMethods?.includes("generateContent")
+            )
+            .map((m: { name: string }) => m.name.replace(/^models\//, ""));
+        }
+      } catch {
+        // Fallback to static candidate models if list endpoint cannot be reached
+      }
+
+      // Sort models prioritizing gemini-1.5-flash, then other flash models, then pro models, then full list
+      const prioritizedModels = Array.from(
+        new Set([
+          ...dynamicModels.filter((m) => m === "gemini-1.5-flash"),
+          ...dynamicModels.filter((m) => m.includes("1.5-flash")),
+          ...dynamicModels.filter((m) => m.includes("flash")),
+          ...dynamicModels.filter((m) => m.includes("pro")),
+          ...dynamicModels,
+          ...CANDIDATE_MODELS,
+        ])
+      );
+
+      for (const modelName of prioritizedModels) {
         try {
           const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
 
@@ -156,7 +298,7 @@ export async function POST(req: NextRequest) {
     // Fallback to built-in knowledge base if API key is missing or all models returned errors
     const debugReason = !apiKeyDetected
       ? "GEMINI_API_KEY is not set in environment variables (.env.local or Vercel Settings -> Environment Variables). Note: On Vercel, after adding an environment variable, you must trigger a Redeploy for it to take effect."
-      : `Gemini API call failed across models: ${modelErrors.join(" | ")}`;
+      : `Gemini API call failed across models: ${modelErrors.slice(0, 3).join(" | ")}`;
 
     console.warn("[AI Route Fallback]:", debugReason);
 
