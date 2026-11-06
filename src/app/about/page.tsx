@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -5,6 +6,15 @@ import { ImpactStats } from "@/components/ImpactStats";
 import { PillarsSection } from "@/components/PillarsSection";
 import { CommunityCTA } from "@/components/CommunityCTA";
 import { CheckCircle2, Target, Eye, Compass } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "About Us — Mission, Vision & Strategic Pillars",
+  description:
+    "Learn about The Student Growth Hub's mission, vision, core values, and 6 strategic pillars empowering students across 37+ countries to thrive beyond grades.",
+  alternates: {
+    canonical: "https://studentgrowthhub.org/about",
+  },
+};
 
 const VALUES = [
   {

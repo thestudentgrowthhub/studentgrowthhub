@@ -1,9 +1,19 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ProgramsSection } from "@/components/ProgramsSection";
 import { CommunityCTA } from "@/components/CommunityCTA";
 import { COMMUNITY_LINKS } from "@/data/site-data";
+
+export const metadata: Metadata = {
+  title: "Our Programs — Growth Beyond Grades & ELITE Campus × Kryptr",
+  description:
+    "Explore The Student Growth Hub's flagship student development programs: Growth Beyond Grades cohorts, ELITE Campus × Kryptr virtual work experience, and monthly webinars.",
+  alternates: {
+    canonical: "https://studentgrowthhub.org/programs",
+  },
+};
 
 export default function ProgramsPage() {
   return (

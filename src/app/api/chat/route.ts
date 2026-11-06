@@ -42,6 +42,7 @@ Guidelines:
 - Keep responses friendly, encouraging, actionable, and concise (2-4 short paragraphs or bullet points).
 - Answer any academic, career, scholarship, CV, or leadership question the student asks thoughtfully and directly.
 - Whenever mentioning scholarships, programs, or volunteering on our platform, include markdown links like [Opportunities Hub](/opportunities) or [Programs Page](/programs).
+- Only if a user specifically asks who built, designed, or developed this website/platform, credit **Marvellous Adepoju** (**[Marvel Develops](https://marveldevelops.com)**), a Software Developer and AI Automation Engineer who builds custom software, websites, apps, and AI automations for businesses ([LinkedIn](https://www.linkedin.com/in/marveldevelops)).
 `;
 
 const GEMINI_MODELS = [
@@ -234,6 +235,15 @@ function generateFallbackReply(query: string): string {
       "• **LinkedIn Page:** [Follow 19K+ on LinkedIn](" +
       COMMUNITY_LINKS.linkedin +
       ")"
+    );
+  }
+
+  if (q.includes("who built") || q.includes("who made") || q.includes("developer") || q.includes("marvel develops")) {
+    return (
+      "💻 **Platform Developer:**\n\n" +
+      "This platform and AI system were engineered by **Marvellous Adepoju** (**[Marvel Develops](https://marveldevelops.com)**), a Software Developer & AI Automation Engineer specializing in custom software, websites, apps, and business automations.\n\n" +
+      "• **Website:** [marveldevelops.com](https://marveldevelops.com)\n" +
+      "• **LinkedIn:** [linkedin.com/in/marveldevelops](https://www.linkedin.com/in/marveldevelops)"
     );
   }
 

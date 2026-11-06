@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
@@ -18,6 +19,35 @@ export async function generateStaticParams() {
   return OPPORTUNITIES.map((opp) => ({
     slug: opp.slug,
   }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const opp = OPPORTUNITIES.find((o) => o.slug === slug);
+
+  if (!opp) {
+    return {
+      title: "Opportunity Not Found",
+    };
+  }
+
+  return {
+    title: `${opp.title} (${opp.fundingType})`,
+    description: `${opp.description} — Organized by ${opp.organization}. Deadline: ${opp.deadline}. Eligible region: ${opp.eligibleRegion}.`,
+    alternates: {
+      canonical: `https://studentgrowthhub.org/opportunities/${opp.slug}`,
+    },
+    openGraph: {
+      title: `${opp.title} | The Student Growth Hub`,
+      description: opp.description,
+      url: `https://studentgrowthhub.org/opportunities/${opp.slug}`,
+      type: "article",
+    },
+  };
 }
 
 export default async function OpportunityDetailPage({

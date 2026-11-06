@@ -1,8 +1,18 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { OpportunitiesFeed } from "@/components/OpportunitiesFeed";
 import { CommunityCTA } from "@/components/CommunityCTA";
 import { ShieldCheck, Bell, Award } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Opportunities Hub — Verified Scholarships, Internships & Fellowships",
+  description:
+    "Browse verified scholarships, internships, fellowships, leadership programs, conferences, and competitions curated by The Student Growth Hub.",
+  alternates: {
+    canonical: "https://studentgrowthhub.org/opportunities",
+  },
+};
 
 export default function OpportunitiesPage() {
   return (
