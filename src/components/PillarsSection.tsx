@@ -7,153 +7,138 @@ import { STRATEGIC_PILLARS } from "@/data/site-data";
 import {
   GraduationCap,
   Briefcase,
-  Compass,
+  Award,
   Cpu,
   Users,
   Globe,
   ArrowRight,
-  CheckCircle2,
+  LucideIcon,
 } from "lucide-react";
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+const ICON_MAP: Record<string, LucideIcon> = {
   GraduationCap,
   Briefcase,
-  Compass,
+  Award,
   Cpu,
   Users,
   Globe,
 };
 
 export function PillarsSection() {
-  const [activePillarId, setActivePillarId] = useState<number>(1);
+  const [selectedNumber, setSelectedNumber] = useState(STRATEGIC_PILLARS[0].number);
   const activePillar =
-    STRATEGIC_PILLARS.find((p) => p.id === activePillarId) || STRATEGIC_PILLARS[0];
+    STRATEGIC_PILLARS.find((p) => p.number === selectedNumber) || STRATEGIC_PILLARS[0];
 
   return (
-    <section className="py-20 sm:py-28 bg-soft-mesh relative border-b border-slate-200/80">
+    <section className="py-20 sm:py-24 bg-soft-mesh border-b border-slate-200/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 sm:mb-16 gap-6">
-          <div className="max-w-2xl">
-            <span className="text-xs sm:text-sm font-bold text-orange-600 uppercase tracking-wider block mb-2">
-              Strategic Blueprint
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-              Six Pillars of Student Growth
-            </h2>
-            <p className="text-base sm:text-lg text-slate-600 mt-3 leading-relaxed">
-              Tap or hover on any pillar below to explore how our initiatives build well-rounded leaders prepared for university, career, and global impact.
-            </p>
-          </div>
-          <div>
-            <Link
-              href="/about"
-              className="inline-flex items-center px-5 py-3 rounded-2xl bg-blue-50 hover:bg-blue-100 text-sm sm:text-base font-bold text-blue-700 group transition-colors"
-            >
-              <span>Explore Our Methodology</span>
-              <ArrowRight className="w-5 h-5 ml-1.5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <span className="text-xs sm:text-sm font-bold text-blue-600 uppercase tracking-wider block mb-2">
+            What We Do
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            Six Strategic Pillars of Growth
+          </h2>
+          <p className="text-base sm:text-xl text-slate-600 mt-3 leading-relaxed">
+            Our activities are organised around six core pillars designed to help students excel academically and thrive beyond the classroom.
+          </p>
         </div>
 
-        {/* Interactive Dynamic Spotlight Banner */}
-        <div className="mb-12 rounded-3xl bg-white border border-blue-100 shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
-            <div className="lg:col-span-5 relative aspect-[16/10] lg:aspect-auto lg:h-full min-h-[260px] bg-blue-50">
+        {/* Interactive Featured Pillar Banner (Large Photo + Details) */}
+        <div className="mb-12 rounded-3xl bg-white border border-slate-200/90 shadow-lg overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+            <div className="lg:col-span-6 relative aspect-[16/10] lg:aspect-auto min-h-[280px] bg-slate-100">
               <Image
-                key={activePillar.image}
                 src={activePillar.image}
                 alt={activePillar.title}
                 fill
-                sizes="(max-width: 1024px) 100vw, 480px"
-                className="object-cover animate-fade-in"
+                sizes="(max-width: 1024px) 100vw, 600px"
+                className="object-cover transition-all duration-500"
               />
-              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-blue-700 text-xs font-extrabold px-3.5 py-1.5 rounded-full shadow-sm">
-                Pillar {activePillar.id} of 6 Spotlight
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white">
+                <span className="px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-blue-600">
+                  Pillar {activePillar.number}
+                </span>
+                <span className="text-xs sm:text-sm font-bold bg-slate-900/75 backdrop-blur-xs px-3 py-1 rounded-full">
+                  {activePillar.highlight}
+                </span>
               </div>
             </div>
 
-            <div className="lg:col-span-7 p-6 sm:p-10 space-y-4">
-              <div className="flex flex-wrap items-center gap-2">
-                {STRATEGIC_PILLARS.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setActivePillarId(p.id)}
-                    className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-bold transition-all ${
-                      p.id === activePillarId
-                        ? "bg-blue-600 text-white shadow-xs"
-                        : "bg-slate-100 text-slate-600 hover:bg-blue-50 hover:text-blue-700"
-                    }`}
-                  >
-                    {p.id}. {p.title.split(" ")[0]}
-                  </button>
-                ))}
+            <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-center space-y-4">
+              <div className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-emerald-600">
+                Active Focus Area • Pillar {activePillar.number}
               </div>
-
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 pt-1">
+              <h3 className="text-2xl sm:text-3xl font-black text-slate-900 leading-tight">
                 {activePillar.title}
               </h3>
-
-              <p className="text-base sm:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
                 {activePillar.description}
               </p>
-
-              <div className="pt-2 flex items-center gap-2.5 text-sm sm:text-base font-bold text-emerald-700 bg-emerald-50 border border-emerald-200/80 px-4 py-3 rounded-2xl">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span>{activePillar.highlightStat}</span>
+              <div className="pt-2">
+                <Link
+                  href="/programs"
+                  className="inline-flex items-center gap-2 text-sm sm:text-base font-bold text-blue-600 hover:text-blue-700 group"
+                >
+                  <span>Explore Programs Under This Pillar</span>
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 6 Pillars Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        {/* 6 Pillars Grid (Click or Hover to Switch Spotlight Photo) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {STRATEGIC_PILLARS.map((pillar) => {
-            const Icon = ICON_MAP[pillar.iconName] || Globe;
-            const isSelected = pillar.id === activePillarId;
+            const Icon = ICON_MAP[pillar.iconName] || GraduationCap;
+            const isSelected = pillar.number === selectedNumber;
+
             return (
-              <div
-                key={pillar.id}
-                onClick={() => setActivePillarId(pillar.id)}
-                onMouseEnter={() => setActivePillarId(pillar.id)}
-                className={`cursor-pointer group p-7 sm:p-8 rounded-3xl bg-white border transition-all duration-300 flex flex-col justify-between ${
+              <button
+                key={pillar.number}
+                type="button"
+                onClick={() => setSelectedNumber(pillar.number)}
+                onMouseEnter={() => setSelectedNumber(pillar.number)}
+                className={`text-left p-6 sm:p-7 rounded-3xl transition-all duration-300 border flex flex-col justify-between ${
                   isSelected
-                    ? "border-blue-500 ring-2 ring-blue-500/15 shadow-xl -translate-y-1"
-                    : "border-slate-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1"
+                    ? "bg-white border-blue-500 ring-2 ring-blue-500/20 shadow-lg -translate-y-1"
+                    : "bg-white/90 border-slate-200/80 hover:bg-white hover:border-blue-300 shadow-xs"
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between mb-5">
                     <div
-                      className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${pillar.accentColor} flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform`}
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${
+                        isSelected
+                          ? "bg-blue-600 text-white shadow-sm"
+                          : "bg-blue-50 text-blue-600"
+                      }`}
                     >
-                      <Icon className="w-7 h-7" />
+                      <Icon className="w-6 h-6" />
                     </div>
-                    <div className="relative w-12 h-12 rounded-2xl overflow-hidden border border-slate-200 shadow-2xs">
-                      <Image
-                        src={pillar.image}
-                        alt={pillar.title}
-                        fill
-                        sizes="48px"
-                        className="object-cover"
-                      />
-                    </div>
+                    <span className="text-2xl font-black text-slate-300">
+                      {pillar.number}
+                    </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                  <h4 className="text-xl font-bold text-slate-900 mb-2">
                     {pillar.title}
-                  </h3>
-                  <p className="text-base text-slate-600 mt-3 leading-relaxed font-normal">
+                  </h4>
+
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                     {pillar.description}
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-sm font-bold text-blue-600 group-hover:text-blue-700">
-                  <span>{isSelected ? "Active Spotlight" : "Preview Pillar Impact"}</span>
-                  <ArrowRight className="w-4 h-4 ml-1.5 transition-transform group-hover:translate-x-1" />
+                <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600">
+                  <span>{pillar.highlight}</span>
+                  <span>{isSelected ? "Viewing ↑" : "Preview →"}</span>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
