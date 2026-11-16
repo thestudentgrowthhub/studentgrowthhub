@@ -3,14 +3,15 @@
 -- Run this in Supabase Dashboard -> SQL Editor -> Click "Run"
 -- ================================================================
 
--- 1. Table: Opportunities (Scholarships, Internships, Fellowships)
+-- 1. Table: Opportunities (Scholarships, Internships, Fellowships, Conferences, etc.)
 CREATE TABLE IF NOT EXISTS public.opportunities (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   slug TEXT UNIQUE NOT NULL,
   title TEXT NOT NULL,
   organization TEXT NOT NULL,
-  category TEXT NOT NULL CHECK (category IN ('Scholarship', 'Internship', 'Fellowship', 'Competition', 'Grant')),
-  funding_type TEXT NOT NULL CHECK (funding_type IN ('Fully Funded', 'Partially Funded', 'Paid', 'Unpaid')),
+  category TEXT NOT NULL CHECK (category IN ('Scholarship', 'Internship', 'Fellowship', 'Leadership', 'Conference', 'Competition', 'Grant')),
+  funding_type TEXT NOT NULL CHECK (funding_type IN ('Fully Funded', 'Partially Funded', 'Free / Stipend', 'Paid', 'Unpaid')),
+  education_level TEXT DEFAULT 'All Levels',
   location TEXT NOT NULL,
   eligible_region TEXT NOT NULL,
   deadline TEXT NOT NULL,
@@ -19,6 +20,7 @@ CREATE TABLE IF NOT EXISTS public.opportunities (
   requirements TEXT[] DEFAULT '{}',
   benefits TEXT[] DEFAULT '{}',
   apply_url TEXT NOT NULL,
+  featured BOOLEAN DEFAULT false,
   is_active BOOLEAN DEFAULT true,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
@@ -59,17 +61,49 @@ CREATE POLICY "Public can view active opportunities"
   ON public.opportunities FOR SELECT
   USING (true);
 
+-- Allow authenticated or public insert/update/delete on opportunities for management
+DROP POLICY IF EXISTS "Public can insert opportunities" ON public.opportunities;
+CREATE POLICY "Public can insert opportunities"
+  ON public.opportunities FOR INSERT
+  WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public can update opportunities" ON public.opportunities;
+CREATE POLICY "Public can update opportunities"
+  ON public.opportunities FOR UPDATE
+  USING (true);
+
+DROP POLICY IF EXISTS "Public can delete opportunities" ON public.opportunities;
+CREATE POLICY "Public can delete opportunities"
+  ON public.opportunities FOR DELETE
+  USING (true);
+
 -- Anyone can submit applications (/get-involved)
 DROP POLICY IF EXISTS "Public can submit applications" ON public.applications;
 CREATE POLICY "Public can submit applications"
   ON public.applications FOR INSERT
   WITH CHECK (true);
 
+-- Allow viewing and updating applications
+DROP POLICY IF EXISTS "Public can view applications" ON public.applications;
+CREATE POLICY "Public can view applications"
+  ON public.applications FOR SELECT
+  USING (true);
+
+DROP POLICY IF EXISTS "Public can update applications status" ON public.applications;
+CREATE POLICY "Public can update applications status"
+  ON public.applications FOR UPDATE
+  USING (true);
+
 -- Anyone can subscribe to newsletter
 DROP POLICY IF EXISTS "Public can subscribe to newsletter" ON public.newsletter_subscribers;
 CREATE POLICY "Public can subscribe to newsletter"
   ON public.newsletter_subscribers FOR INSERT
   WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public can view subscribers" ON public.newsletter_subscribers;
+CREATE POLICY "Public can view subscribers"
+  ON public.newsletter_subscribers FOR SELECT
+  USING (true);
 
 -- Pre-seed verified opportunities from blueprint
 INSERT INTO public.opportunities (

@@ -80,7 +80,51 @@ Submitted at: ${new Date().toISOString()}
       });
     }
 
-    // 1. If Resend API Key is configured
+    // 1. If Brevo API Key is configured (Native REST API - 300 free emails/day)
+    if (process.env.BREVO_API_KEY) {
+      try {
+        const brevoRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "api-key": process.env.BREVO_API_KEY,
+          },
+          body: JSON.stringify({
+            sender: {
+              name: "The Student Growth Hub",
+              email: process.env.BREVO_SENDER_EMAIL || "thestudentgrowthhub@gmail.com",
+            },
+            to: [
+              {
+                email: "thestudentgrowthhub@gmail.com",
+                name: "TSGH Admin",
+              },
+            ],
+            replyTo: {
+              email: email,
+              name: fullName,
+            },
+            subject: subject,
+            textContent: formattedSummary,
+          }),
+        });
+
+        if (brevoRes.ok) {
+          return NextResponse.json({
+            success: true,
+            delivery: "brevo",
+            message: "Your submission has been sent to The Student Growth Hub team!",
+          });
+        } else {
+          const errData = await brevoRes.json().catch(() => ({}));
+          console.warn("[Brevo delivery warning]:", errData);
+        }
+      } catch (err) {
+        console.warn("[Brevo delivery error]:", err);
+      }
+    }
+
+    // 2. If Resend API Key is configured
     if (process.env.RESEND_API_KEY) {
       try {
         const resendRes = await fetch("https://api.resend.com/emails", {
