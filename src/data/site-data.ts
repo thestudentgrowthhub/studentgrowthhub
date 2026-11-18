@@ -421,6 +421,226 @@ export const OPPORTUNITIES: Opportunity[] = [
   },
 ];
 
+export interface Resource {
+  id: string;
+  slug: string;
+  title: string;
+  category: "Career & CV" | "Scholarship Guides" | "Academic Success" | "Leadership & Changemaking";
+  description: string;
+  readTime: string;
+  downloadsCount: string;
+  format: "Interactive Guide" | "Checklist" | "Template / Framework";
+  tags: string[];
+  featured: boolean;
+  content: {
+    overview: string;
+    keyTakeaways: string[];
+    actionSteps: { title: string; detail: string }[];
+    proTip: string;
+  };
+}
+
+export const RESOURCES_DATA: Resource[] = [
+  {
+    id: "res-1",
+    slug: "high-impact-student-cv-template",
+    title: "The High-Impact Undergraduate CV & Resume Framework",
+    category: "Career & CV",
+    description:
+      "A tested, ATS-compliant CV structure designed for students and recent graduates applying to international internships, graduate trainee roles, and fellowships.",
+    readTime: "6 min read",
+    downloadsCount: "2.4K+",
+    format: "Template / Framework",
+    tags: ["CV / Resume", "Employability", "ATS", "Career"],
+    featured: true,
+    content: {
+      overview:
+        "Most student resumes fail because they list coursework rather than measurable outcomes. Whether you have 3 years of work experience or zero, this framework shows how to frame campus leadership, class projects, and community volunteer work into quantifiable achievements.",
+      keyTakeaways: [
+        "Use the Google XYZ Formula: 'Accomplished [X] as measured by [Y], by doing [Z]'.",
+        "Keep your student CV strictly to 1 page unless you have 5+ years of verified professional experience.",
+        "Avoid multi-column tables, fancy graphics, or progress bars that break Applicant Tracking Systems (ATS).",
+        "Highlight verified projects, relevant technical proficiencies, and community leadership.",
+      ],
+      actionSteps: [
+        {
+          title: "1. Header & Contact Clarity",
+          detail: "Include your Full Name, Professional Email (e.g. firstname.lastname@gmail.com), Phone Number with country code, LinkedIn URL, and City/Country. Do not include photos, marital status, or age.",
+        },
+        {
+          title: "2. Education & Academic Highlights",
+          detail: "List Institution, Degree title, Expected Graduation Year, and relevant honors (e.g., First Class / Dean's List). If your GPA is strong, include it; if not, emphasize relevant coursework and capstone projects.",
+        },
+        {
+          title: "3. Project & Leadership Experience",
+          detail: "Dedicate 3-4 bullet points per role starting with active verbs (spearheaded, formulated, optimized, facilitated). Always tie actions to outcomes.",
+        },
+      ],
+      proTip: "Never submit a CV as a .docx file. Always export as a clean, searchable PDF with the filename 'FirstName_LastName_CV.pdf'.",
+    },
+  },
+  {
+    id: "res-2",
+    slug: "international-scholarship-sop-toolkit",
+    title: "Winning Statement of Purpose (SOP) & Essay Masterclass",
+    category: "Scholarship Guides",
+    description:
+      "Comprehensive breakdown of how to craft persuasive personal statements and motivation letters for Chevening, Mastercard Foundation, Erasmus Mundus, and global scholarships.",
+    readTime: "8 min read",
+    downloadsCount: "3.1K+",
+    format: "Interactive Guide",
+    tags: ["Scholarships", "SOP", "Study Abroad", "Essay"],
+    featured: true,
+    content: {
+      overview:
+        "Scholarship review committees read thousands of essays. What differentiates winning applicants is not just high GPA, but a coherent narrative arc connecting your past experiences, current academic ambition, and future community impact.",
+      keyTakeaways: [
+        "Open with a defining moment or intellectual catalyst—never start with generic quotes like 'Education is the most powerful weapon'.",
+        "Directly answer: Why this specific degree? Why this country/university? And why NOW?",
+        "Prove your post-graduation return-on-investment: How will you deploy your knowledge to tackle SDG issues in your home community?",
+        "Address academic weaknesses or gaps proactively by framing them through resilience and lessons learned.",
+      ],
+      actionSteps: [
+        {
+          title: "1. The Narrative Hook (Paragraph 1)",
+          detail: "Describe a specific challenge or real-world problem you witnessed that sparked your academic interest.",
+        },
+        {
+          title: "2. Academic Preparation & Practical Proof (Paragraphs 2-3)",
+          detail: "Detail your undergraduate research, internships, and skill foundation that prove you are academically ready for intense study.",
+        },
+        {
+          title: "3. The Institutional Match (Paragraph 4)",
+          detail: "Name specific professors, specialized modules, research labs, or university centers that make this program unique for your goals.",
+        },
+        {
+          title: "4. The Long-Term Impact Plan (Paragraph 5)",
+          detail: "Detail your concrete 5-year and 10-year roadmap showing how you will give back and contribute to societal growth.",
+        },
+      ],
+      proTip: "Have at least 2 mentors or peers review your essay for tone and flow before submission. Avoid passive voice.",
+    },
+  },
+  {
+    id: "res-3",
+    slug: "cold-emailing-guide-for-fellowships-internships",
+    title: "The Student Cold Emailing Playbook for Internships & Research",
+    category: "Career & CV",
+    description:
+      "Exact email templates and outreach strategies to connect with professors, hiring managers, and industry leaders without being ignored.",
+    readTime: "5 min read",
+    downloadsCount: "1.8K+",
+    format: "Template / Framework",
+    tags: ["Networking", "Internships", "Cold Email", "Mentorship"],
+    featured: false,
+    content: {
+      overview:
+        "Over 70% of high-impact research assistantships and startup internships are never publicly advertised—they exist in the 'hidden job market'. Cold emailing is the fastest way for proactive students to unlock these opportunities.",
+      keyTakeaways: [
+        "Keep your email under 150 words: brevity signals respect for the recipient's time.",
+        "Hyper-personalize the first two sentences: cite their recent publication, talk, or company milestone.",
+        "Include a specific, low-friction Call to Action (e.g. 'A brief 10-minute introductory call' or 'A 2-question inquiry').",
+        "Follow up politely exactly 5 to 7 business days later if you don't receive a reply.",
+      ],
+      actionSteps: [
+        {
+          title: "1. Research & Targeting",
+          detail: "Identify 10-15 professionals whose work directly aligns with your career aspirations. Find their direct email via company directories or tools like Hunter.io.",
+        },
+        {
+          title: "2. The 3-Sentence Pitch Structure",
+          detail: "Sentence 1: Who you are and why you admire their specific work. Sentence 2: The unique skills or perspective you bring. Sentence 3: The low-friction ask.",
+        },
+        {
+          title: "3. The Follow-Up Cadence",
+          detail: "80% of responses come on the first follow-up. Keep follow-ups gracious and bump the previous thread without guilt or pressure.",
+        },
+      ],
+      proTip: "Send outreach emails on Tuesday or Thursday mornings between 8:30 AM and 10:00 AM in the recipient's local time zone.",
+    },
+  },
+  {
+    id: "res-4",
+    slug: "global-scholarship-readiness-checklist",
+    title: "The 12-Month Global Scholarship Readiness Checklist",
+    category: "Scholarship Guides",
+    description:
+      "A month-by-month roadmap to prepare documents, language tests, recommendation letters, and leadership portfolios well ahead of global deadlines.",
+    readTime: "7 min read",
+    downloadsCount: "1.5K+",
+    format: "Checklist",
+    tags: ["Checklist", "Planning", "Scholarships", "Timeline"],
+    featured: false,
+    content: {
+      overview:
+        "Applying to international opportunities is a marathon. Starting 12 to 9 months before deadlines prevents last-minute transcript delays, rushed recommendation letters, and stressful application fees.",
+      keyTakeaways: [
+        "Secure unofficial and official transcripts from your registrar at least 6 months ahead.",
+        "Build genuine relationships with 3 academic and professional referees who know your work deeply.",
+        "Schedule English proficiency tests (IELTS/TOEFL) early or confirm waiver eligibility from your institution.",
+        "Track all deadlines in a centralized spreadsheet with requirements, links, and submission dates.",
+      ],
+      actionSteps: [
+        {
+          title: "Months 12-9: Discovery & Profile Audit",
+          detail: "Identify 5 target programs (2 reach, 2 target, 1 safety). Audit eligibility and language prerequisites.",
+        },
+        {
+          title: "Months 8-6: Testing & Documents",
+          detail: "Order transcripts, international passport renewals, and take required standardized assessments.",
+        },
+        {
+          title: "Months 5-3: Essay Drafting & Referees",
+          detail: "Provide your referees with your CV and draft essays so their recommendation letters align with your story.",
+        },
+        {
+          title: "Months 2-1: Final Polish & Early Submission",
+          detail: "Submit applications at least 1 week before the deadline to avoid server crashes during final deadline hours.",
+        },
+      ],
+      proTip: "Never wait until the final deadline day. Scholarship portals regularly experience technical downtime under heavy global traffic.",
+    },
+  },
+  {
+    id: "res-5",
+    slug: "community-impact-sdg-project-blueprint",
+    title: "How to Design & Lead an Impactful Youth Community Initiative",
+    category: "Leadership & Changemaking",
+    description:
+      "A step-by-step blueprint to conceptualize, launch, and measure local community projects aligned with the United Nations Sustainable Development Goals (SDGs).",
+    readTime: "9 min read",
+    downloadsCount: "1.1K+",
+    format: "Interactive Guide",
+    tags: ["Leadership", "SDGs", "Social Impact", "Initiatives"],
+    featured: false,
+    content: {
+      overview:
+        "Top fellowship programs (like Chevening, Rhodes, and Mandela Washington) look for evidence of changemaking. You do not need a registered NGO or millions in funding to create demonstrable social impact.",
+      keyTakeaways: [
+        "Focus on depth over breadth: solve one specific problem for 20-50 people exceptionally well rather than attempting a vague national campaign.",
+        "Align with a specific UN SDG target (e.g. SDG 4: Quality Education, SDG 8: Decent Work, SDG 13: Climate Action).",
+        "Document everything with high-resolution photos, attendance registries, and pre/post participant feedback.",
+        "Partner with local schools, youth clubs, or community centers to build grassroots trust.",
+      ],
+      actionSteps: [
+        {
+          title: "1. Needs Assessment & Community Listening",
+          detail: "Conduct 10-15 brief interviews with community members to validate what they actually need before designing solutions.",
+        },
+        {
+          title: "2. The Minimum Viable Initiative (MVI)",
+          detail: "Run a 1-day workshop, book donation drive, or mentorship session. Test your assumptions and gather feedback.",
+        },
+        {
+          title: "3. Measuring & Reporting Outcomes",
+          detail: "Track quantitative metrics (students trained, books distributed, hours delivered) and qualitative impact quotes.",
+        },
+      ],
+      proTip: "Capture high-quality media during your project. Visual evidence and testimonials are crucial when applying for seed grants and fellowships.",
+    },
+  },
+];
+
 export const COMMUNITY_LINKS = {
   whatsapp: "https://chat.whatsapp.com/K9svkTf3bNM2HlwknLpIOH?s=cl&p=a&iam=2",
   linkedin: "https://www.linkedin.com/company/the-student-growth-hub/",

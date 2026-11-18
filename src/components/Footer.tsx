@@ -145,6 +145,9 @@ export function Footer() {
                 <Link href="/opportunities" className="text-slate-600 hover:text-blue-600 transition-colors">Opportunities Hub</Link>
               </li>
               <li>
+                <Link href="/resources" className="text-slate-600 hover:text-blue-600 transition-colors">Resources &amp; Toolkits</Link>
+              </li>
+              <li>
                 <Link href="/programs#webinars" className="text-slate-600 hover:text-blue-600 transition-colors">Events &amp; Webinars</Link>
               </li>
             </ul>
