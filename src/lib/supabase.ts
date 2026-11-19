@@ -204,7 +204,6 @@ export async function fetchSubscribersFromDb(): Promise<SubscriberRecord[]> {
     return [];
   }
 }
-}
 
 export async function submitApplication(payload: {
   category: string;

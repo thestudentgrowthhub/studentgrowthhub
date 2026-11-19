@@ -7,7 +7,6 @@ import { Footer } from "@/components/Footer";
 import { RESOURCES_DATA, Resource } from "@/data/site-data";
 import {
   FileText,
-  Download,
   CheckCircle2,
   Sparkles,
   ArrowRight,
@@ -17,8 +16,6 @@ import {
   Check,
   Lightbulb,
   Search,
-  Filter,
-  Bookmark,
 } from "lucide-react";
 
 export default function ResourcesPage() {
