@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -18,10 +18,21 @@ const NAV_LINKS = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs transition-colors">
+    <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
+      scrolled
+        ? "bg-white/80 backdrop-blur-xl border-slate-200/60 shadow-md"
+        : "bg-white/95 backdrop-blur-md border-slate-200/80 shadow-2xs"
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20 sm:h-24">
           
@@ -57,7 +68,7 @@ export function Navbar() {
                   href={link.href}
                   className={`px-4 py-2.5 rounded-xl text-sm sm:text-base font-bold transition-all duration-150 ${
                     isActive
-                      ? "text-blue-700 bg-blue-50 shadow-2xs"
+                      ? "text-blue-700 bg-blue-50 shadow-2xs ring-1 ring-blue-200/60"
                       : "text-slate-700 hover:text-blue-700 hover:bg-slate-100/80"
                   }`}
                 >

@@ -63,6 +63,10 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden pt-8 pb-16 sm:pt-14 sm:pb-24 bg-ambient-light border-b border-slate-200/80">
+      {/* Ambient Radial Gradient Mesh */}
+      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[350px] bg-gradient-to-tr from-blue-500/10 via-indigo-500/10 to-emerald-500/10 blur-3xl pointer-events-none rounded-full animate-pulse [animation-duration:8s]" />
+      <div className="absolute bottom-10 right-1/4 w-[450px] h-[300px] bg-gradient-to-br from-emerald-500/10 via-teal-500/10 to-blue-500/10 blur-3xl pointer-events-none rounded-full" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
@@ -88,7 +92,7 @@ export function Hero() {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
               <Link
                 href="/opportunities"
-                className="w-full sm:w-auto min-h-[54px] inline-flex items-center justify-center px-7 py-4 rounded-2xl font-bold text-base text-white bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-blue-600/25 transition-all duration-200 group"
+                className="w-full sm:w-auto min-h-[54px] inline-flex items-center justify-center px-7 py-4 rounded-2xl font-bold text-base text-white bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-blue-600/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 group"
               >
                 <span>Explore Opportunities</span>
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -98,7 +102,7 @@ export function Hero() {
                 href={COMMUNITY_LINKS.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto min-h-[54px] inline-flex items-center justify-center px-7 py-4 rounded-2xl font-bold text-base text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-200 transition-all duration-200 shadow-xs"
+                className="w-full sm:w-auto min-h-[54px] inline-flex items-center justify-center px-7 py-4 rounded-2xl font-bold text-base text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border-2 border-emerald-200 hover:border-emerald-300 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 shadow-xs"
               >
                 <MessageCircle className="w-5 h-5 mr-2 text-emerald-600 fill-emerald-600/20" />
                 <span>Join Our Community</span>

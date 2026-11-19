@@ -44,6 +44,12 @@ export function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Auto-dismiss teaser after 6 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => setShowTeaser(false), 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -247,11 +253,14 @@ export function Chatbot() {
 
       {/* Main Floating Trigger Button */}
       {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="group relative flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-          aria-label="Open AI Chatbot"
-        >
+        <div className="relative">
+          {/* Breathing outer glow ring */}
+          <span className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-emerald-500 opacity-40 blur-md animate-pulse [animation-duration:2.5s] pointer-events-none" />
+          <button
+            onClick={() => setIsOpen(true)}
+            className="group relative flex items-center gap-2.5 px-4 py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            aria-label="Open AI Chatbot"
+          >
           <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/40">
             <Image
               src="/images/tsgh-official-logo.jpg"
@@ -267,6 +276,7 @@ export function Chatbot() {
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-300"></span>
           </span>
         </button>
+        </div>
       )}
 
       {/* Responsive Chat Window */}

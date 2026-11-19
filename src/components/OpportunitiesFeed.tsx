@@ -229,7 +229,7 @@ function OpportunityCard({ opp }: { opp: Opportunity }) {
   };
 
   return (
-    <div className="group rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+    <div className="group rounded-3xl bg-white border border-slate-200/90 p-6 sm:p-7 shadow-xs hover:shadow-xl hover:shadow-blue-100/60 hover:-translate-y-1 hover:border-blue-200/70 transition-all duration-300 flex flex-col justify-between">
       <div>
         {/* Top Badges */}
         <div className="flex items-center justify-between gap-2 mb-4">

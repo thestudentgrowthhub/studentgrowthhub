@@ -32,8 +32,10 @@ export function ProgramsSection() {
               <div
                 key={program.id}
                 id={program.id}
-                className="rounded-3xl bg-slate-50/70 border border-slate-200/90 p-6 sm:p-10 lg:p-12 shadow-md hover:shadow-xl transition-all duration-300"
+                className="group rounded-3xl bg-slate-50/70 border border-slate-200/90 p-6 sm:p-10 lg:p-12 shadow-md hover:shadow-2xl hover:border-blue-200/80 hover:bg-white transition-all duration-300 relative overflow-hidden"
               >
+                {/* Subtle radial glow on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-[radial-gradient(ellipse_at_top_left,_rgba(59,130,246,0.06)_0%,_transparent_60%)]" />
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                   
                   {/* Large, Full-Size Program Photo (No Tiny Overlapping Icon Box) */}
@@ -93,7 +95,7 @@ export function ProgramsSection() {
                       {program.metrics.map((m) => (
                         <div
                           key={m.label}
-                          className="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs"
+                          className="p-3.5 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:border-blue-200 hover:shadow-blue-50 hover:shadow-md transition-all duration-200"
                         >
                           <div className="text-xs font-semibold text-slate-500">
                             {m.label}
